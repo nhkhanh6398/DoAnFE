@@ -1,0 +1,116 @@
+<div class="container-fluid">
+  <div class="row" style="background: #3ba66b">
+    <div class="col-md-3 col-xl-3 col-3">
+      <div class="nav-logo">
+        <img class="ml-5" src="assets/img/logo.png" alt=" " width="90px">
+      </div>
+    </div>
+    <div class="col-xl-6 col-md-6 col-6">
+      <form class="my-2 my-lg-0">
+        <div class="row m-2">
+          <div class="col-8 col-md-8">
+            <input class="form-control mr-sm-2" type="search"
+                   placeholder="Tìm sản phẩm,thương hiệu hay danh mục mà bạn muốn... " aria-label="Search">
+          </div>
+          <div class="col-4 col-md-4">
+            <button class="btn" style="background: #abdde5" type="submit"><i class="fas fa-search"></i> Tìm
+              Kiếm
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="col-xl-3 col-md-3">
+    </div>
+  </div>
+  <div class="row mt-3">
+    <div class="col-8">
+      <ngb-carousel>
+        <ng-template ngbSlide>
+          <div class="picsum-img-wrapper">
+            <img src="assets/img/slide1.png" alt="Carousel One">
+          </div>
+          <div class="carousel-caption">
+
+            <p>Săn Deal Nhà Cửa</p>
+          </div>
+        </ng-template>
+        <ng-template ngbSlide>
+          <div class="picsum-img-wrapper">
+            <img src="assets/img/slide2.png" alt="Carousel Two">
+          </div>
+          <div class="carousel-caption">
+            <p>Cà Phê Đậm Đà Quà Tặng Cực Đã</p>
+          </div>
+        </ng-template>
+        <ng-template ngbSlide>
+          <div class="picsum-img-wrapper">
+            <img src="assets/img/slide3.png" alt="Carousel Three">
+          </div>
+          <div class="carousel-caption">
+            <p>Chốt năm Hoành Tráng</p>
+          </div>
+        </ng-template>
+      </ngb-carousel>
+    </div>
+    <div class="col-4">
+      <img src="assets/img/samsung1.png" alt="" width="100%" height="80%">
+    </div>
+  </div>
+</div>
+<div class="container">
+  <div class="row mb-2" style="background-color:#efefef ">
+    <div class="row giasoc">
+      <div class="row">
+        <img src="https://frontend.tikicdn.com/_desktop-next/static/img/giasoc.svg">
+        <img src="https://frontend.tikicdn.com/_desktop-next/static/img/dealFlashIcon.svg" class="set">
+        <img src="https://frontend.tikicdn.com/_desktop-next/static/img/homnay.svg">
+      </div>
+    </div>
+
+    <ngx-slick-carousel class="carousel"
+                        #slickModal="slick-carousel"
+                        [config]="slideConfig"
+                        (init)="slickInit($event)"
+                        (breakpoint)="breakpoint($event)"
+                        (afterChange)="afterChange($event)"
+                        (beforeChange)="beforeChange($event)">
+      <div ngxSlickItem *ngFor="let list of listProduct" class="slide">
+        <div class="m-1">
+          <img [src]="'assets/img/' +list.productImage" alt="" width="100%">
+          <p class="card-text text-danger">{{list.productPrice |currency: "VND"}}</p>
+        </div>
+      </div>
+    </ngx-slick-carousel>
+    <div class="row"></div>
+  </div>
+</div>
+<div class="container-fluid">
+  <div class="row" style="background-color:#efefef ">
+    <div class="col-md-3 col-3 col-xl-3 mt-1" *ngFor="let product of listProduct">
+      <a [routerLink]="['/detail-product', product.productId]">
+        <div class="card" style="width: 18rem;">
+          <img class="card-img-top" [src]="'assets/img/' +product.productImage" alt="Card image cap">
+          <div class="card-body">
+            <h5 class="card-title">{{product.productName}}</h5>
+            <label class="">
+              <span class="fa fa-star checked start"></span>
+              <span class="fa fa-star checked start"></span>
+              <span class="fa fa-star checked start"></span>
+              <span class="fa fa-star start"></span>
+              <span class="fa fa-star start"></span>
+            </label>
+            <p class="card-text text-danger">{{product.productPrice |currency: "VND"}}</p>
+            <a href="#" class="btn btn-primary">Xem Chi Tiết</a>
+          </div>
+        </div>
+      </a>
+    </div>
+
+  </div>
+</div>
+
+<app-footer></app-footer>
+
+
+
