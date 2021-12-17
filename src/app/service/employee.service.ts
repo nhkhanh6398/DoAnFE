@@ -10,6 +10,7 @@ import {IPosition} from "../interface-entity/IPosition";
 })
 export class EmployeeService {
   readonly URL= "http://localhost:8080/employee/";
+  readonly URL_SEARCH = "http://localhost:8080/employee/search";
   constructor(private httpClient: HttpClient) { }
   getAllEmployee():Observable<IEmployee>{
     return this.httpClient.get<IEmployee>(this.URL+'list');
@@ -29,9 +30,13 @@ export class EmployeeService {
   updateEmployee(employee:DtoEmployee):Observable<DtoEmployee>{
     return this.httpClient.put<DtoEmployee>(this.URL+'edit',employee);
   }
-
   getPageProduct(number: number):Observable<any> {
     return this.httpClient.get<any>(this.URL + 'list?page='+number);
-
+  }
+  searchPageEmployee(pageNumber: number,key: string):Observable<any>{
+    return this.httpClient.get<any>(this.URL_SEARCH + '?page='+pageNumber + '&key='+key);
+  }
+  searchEmployee(key:string):Observable<any>{
+    return this.httpClient.get<any>(this.URL_SEARCH + '?key='+key);
   }
 }

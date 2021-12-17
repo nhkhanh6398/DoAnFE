@@ -4,7 +4,7 @@ export interface IEmployee {
   totalPages: number;
   id: string,
   nameEmployee: string,
-  dateOfBirth: Date,
+  dateOfBirth: string,
   idCard: string,
   salary: number,
   phoneNumber: string,

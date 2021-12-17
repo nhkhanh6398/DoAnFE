@@ -7,6 +7,7 @@ import {ICategories} from "../../interface-entity/ICategories";
 import {ISuppliers} from "../../interface-entity/ISuppliers";
 import {UpdateProduct} from "../../interface-entity/UpdateProduct";
 import {validSelectValidators} from "../../validator/valid-select.validators";
+import {AlertService} from "../../alert.service";
 
 @Component({
   selector: 'app-edit-product',
@@ -24,24 +25,25 @@ export class EditProductComponent implements OnInit {
   constructor(private router: Router,
               private productService: ProductService,
               private dialog: MatDialogRef<EditProductComponent>,
-              @Inject(MAT_DIALOG_DATA) public data: any) {
+              @Inject(MAT_DIALOG_DATA) public data: any,
+              private alertService : AlertService) {
   }
 
   ngOnInit(): void {
     this.productService.getAllCategories().subscribe((data) => {
       this.categoryList = data;
     });
-    this.productService.getAllSuppliers().subscribe((data) => {
-      this.suppliersList = data;
-    });
     this.editProduct = new FormGroup({
       productId: new FormControl('', [Validators.required]),
       productName: new FormControl('', [Validators.required]),
       productQuantity: new FormControl('', [Validators.required]),
       productPrice: new FormControl('', [Validators.required]),
+      detail: new FormControl('', [Validators.required]),
+      trademark: new FormControl('',[Validators.required]),
+      categoriesId: new FormControl('',[validSelectValidators()]),
       productImage: new FormControl(''),
-      categories: new FormControl(0,[validSelectValidators()]),
-      suppliers: new FormControl(0,[validSelectValidators()])
+
+
     });
     this.productService.getProductById(this.data.productId).subscribe((data) => {
       this.editProduct.controls.productId.setValue(data.productId);
@@ -49,8 +51,10 @@ export class EditProductComponent implements OnInit {
       this.editProduct.controls.productPrice.setValue(data.productPrice);
       this.editProduct.controls.productQuantity.setValue(data.productQuantity);
       // this.editProduct.controls.productImage.setValue(data.productImage);
-      this.editProduct.controls.categories.setValue(data.categories.categoryId);
-      this.editProduct.controls.suppliers.setValue(data.suppliers.suppliersId);
+      this.editProduct.controls.detail.setValue(data.detail);
+      this.editProduct.controls.trademark.setValue(data.trademark);
+      this.editProduct.controls.categoriesId.setValue(data.categories.categoryId);
+
       console.log(this.editProduct);
     });
   };
@@ -59,11 +63,15 @@ export class EditProductComponent implements OnInit {
 
     if (this.editProduct.valid) {
       console.log(this.editProduct.value);
+      console.log(this.editProduct.value.categories)
       const value = this.editProduct.value;
+      let img = value.productImage;
+      img = img.substr(12,img.length);
       this.productEdit = new UpdateProduct(value.productId,value.productName,value.productQuantity,value.productPrice,
-        value.productImage,value.categories,value.suppliers);
+        img,value.detail,value.trademark,value.categoriesId);
       this.productService.updateProduct(this.productEdit).subscribe((data) => {
         this.dialog.close();
+        this.alertService.showAlertSuccess("Sửa thành công");
       })
     }
   }

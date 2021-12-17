@@ -5,6 +5,7 @@ import {MatDialog} from "@angular/material/dialog";
 import {DetailEmployeeComponent} from "../detail-employee/detail-employee.component";
 import {EditEmployeeComponent} from "../edit-employee/edit-employee.component";
 import {DeleteEmployeeComponent} from "../delete-employee/delete-employee.component";
+import {FormControl, FormGroup} from "@angular/forms";
 
 @Component({
   selector: 'app-list-employee',
@@ -15,12 +16,17 @@ export class ListEmployeeComponent implements OnInit {
   listEmployee: IEmployee[] = [];
   indexPagination: number = 1;
   totalPagination: number = 0;
+  searchEmployee!: FormGroup;
 
   constructor(private employeeService: EmployeeService,private dialog: MatDialog) {
   }
 
   ngOnInit(): void {
     this.getListEmployee();
+    this.searchEmployee = new FormGroup({
+      key: new FormControl('')
+      }
+    )
   }
 
   getListEmployee() {
@@ -65,7 +71,7 @@ export class ListEmployeeComponent implements OnInit {
     })
   }
   getPage(number: number) {
-    this.employeeService.getPageProduct(number).subscribe(data=>{
+    this.employeeService.searchPageEmployee(number,this.searchEmployee.value.key).subscribe(data=>{
       this.listEmployee = data.content;
       this.indexPagination = data.pagealbe.pageNumber +1;
     })
@@ -81,6 +87,18 @@ export class ListEmployeeComponent implements OnInit {
       dialog.afterClosed().subscribe(result => {
         this.ngOnInit();
       });
+    })
+  }
+
+  search() {
+    this.employeeService.searchPageEmployee(0,this.searchEmployee.value.key).subscribe((data)=>{
+      this.listEmployee = data.content;
+    })
+  }
+
+  seacrhEnter($event: KeyboardEvent) {
+    this.employeeService.searchPageEmployee(0,this.searchEmployee.value.key).subscribe((data)=>{
+      this.listEmployee = data.content;
     })
   }
 }

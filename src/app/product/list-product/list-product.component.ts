@@ -5,6 +5,7 @@ import {EditProductComponent} from "../edit-product/edit-product.component";
 import {MatDialog} from "@angular/material/dialog";
 import {DeleteProductComponent} from "../delete-product/delete-product.component";
 import {DetailProductComponent} from "../detail-product/detail-product.component";
+import {FormControl, FormGroup} from "@angular/forms";
 
 @Component({
   selector: 'app-list-product',
@@ -15,16 +16,22 @@ export class ListProductComponent implements OnInit {
   listProduct: IProduct[] = [];
   indexPagination: number = 1;
   totalPagination: number = 0;
+  searchProduct!: FormGroup;
+
   constructor(private productService: ProductService, private dialog: MatDialog) {
   }
 
   ngOnInit(): void {
-    this.getListProduct()
+    this.getListProduct();
+
+    this.searchProduct = new FormGroup({
+      key: new FormControl('')
+    })
   }
   getPage(number: number) {
-    this.productService.getPageProduct(number).subscribe(data=>{
+    this.productService.searchPageProduct(number,this.searchProduct.value.key).subscribe((data)=>{
       this.listProduct = data.content;
-      this.indexPagination = data.pagealbe.pageNumber +1;
+      this.indexPagination = data.pageable.pageNumber + 1;
     })
   }
   getListProduct() {
@@ -51,6 +58,7 @@ export class ListProductComponent implements OnInit {
         autoFocus: false
       })
       dialog.afterClosed().subscribe(result => {
+
         this.ngOnInit();
       });
     })
@@ -84,5 +92,18 @@ export class ListProductComponent implements OnInit {
     })
   }
 
+
+  search() {
+    this.productService.searchPageProduct(0,this.searchProduct.value.key).subscribe((data)=>{
+      this.listProduct = data.content;
+    })
+  }
+
+  seacrhEnter($event: KeyboardEvent) {
+    this.productService.searchPageProduct(0,this.searchProduct.value.key).subscribe((data)=>{
+      this.listProduct = data.content;
+
+    })
+  }
 
 }

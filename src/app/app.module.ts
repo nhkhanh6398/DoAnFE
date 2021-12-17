@@ -21,6 +21,9 @@ import {ReactiveFormsModule} from "@angular/forms";
 import {CreateEmployeeComponent} from "./employee/create-employee/create-employee.component";
 import {RouterHomeModule} from "./home-page/router-home.module";
 import { SlickCarouselModule } from 'ngx-slick-carousel';
+import { NgxImageZoomModule } from 'ngx-image-zoom';
+import {ListCustomerComponent} from "./customer/list-customer/list-customer.component";
+
 
 
 
@@ -32,6 +35,7 @@ import { SlickCarouselModule } from 'ngx-slick-carousel';
     CreateProductComponent,
     HeaderComponent,
     CreateEmployeeComponent,
+    ListCustomerComponent,
   ],
   imports: [
     BrowserModule,
@@ -48,7 +52,9 @@ import { SlickCarouselModule } from 'ngx-slick-carousel';
     MatDialogModule,
     ReactiveFormsModule,
     RouterHomeModule,
-    SlickCarouselModule
+    SlickCarouselModule,
+    NgxImageZoomModule
+
   ],
   providers: [],
   exports: [

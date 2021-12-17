@@ -48,8 +48,16 @@
            createProduct.get('productImage')?.errors?.required">Hình ảnh không được để trống.
                   </div>
                 </div>
-                <div class="col-md-6">
-                  <label class="form-label mt-2">Thể Loại: <span style="color: red">(*)</span></label>
+                <div class="mb-3 col-md-12">
+                  <label class="form-label">Mô Tả Sản Phẩm: <span style="color: red">(*)</span></label>
+                  <textarea rows="4" cols="50" class="form-control" formControlName="detail"
+                            placeholder="Nhập mô tả" required></textarea>
+                  <div class="alert alert-danger" *ngIf="createProduct.get('detail')?.invalid && createProduct.get('detail')?.touched &&
+           createProduct.get('detail')?.errors?.required">Mô tả không được để trống.
+                  </div>
+                </div>
+                <div class="mb-3  col-md-6">
+                  <label class="form-label">Thể Loại: <span style="color: red">(*)</span></label>
                   <div class="input-group mb-3">
                     <select class="form-control" formControlName="categoriesId">
                       <option value=0>Chọn thể loại</option>
@@ -63,21 +71,24 @@
                     </div>
                   </div>
                 </div>
-                <div class="col-md-6">
-                  <label class="form-label mt-2">Hãng Sản Xuất: <span style="color: red">(*)</span></label>
-                  <div class="input-group mb-3">
-                    <select class="form-control" id="suppliers" formControlName="suppliersId">
-                      <option value=0>Chọn hãng sản xuất</option>
-                      <option *ngFor=" let suppliers of suppliersList"
-                              [ngValue]="suppliers.suppliersId">{{suppliers?.suppliersName}}</option>
-                    </select>
-                  </div>
-                  <div *ngIf="createProduct.controls.suppliersId.invalid">
-                    <div class="alert alert-danger"  *ngIf="createProduct.controls.suppliersId.errors?.notNull">Hãng sản xuất không được để
-                      trống.
-                    </div>
+                <div class="mb-3 col-md-6">
+                  <label class="form-label">Thương Hiệu: <span style="color: red">(*)</span></label>
+                  <input type="text" class="form-control mb-3" formControlName="trademark"
+                         placeholder="Nhập thương hiệu" required>
+                  <div class="alert alert-danger" *ngIf="createProduct.get('trademark')?.invalid && createProduct.get('trademark')?.touched &&
+           createProduct.get('trademark')?.errors?.required">Thương hiệu không được để trống.
                   </div>
                 </div>
+<!--                <div class="col-md-6">-->
+<!--                  <label class="form-label">Thương Hiệu: <span style="color: red">(*)</span></label>-->
+<!--                  <div class="input-group mb-3">-->
+<!--                    <input type="text" class="form-control" formControlName="trademark"-->
+<!--                           placeholder="Nhập thương hiệu" required>-->
+<!--                    <div class="alert alert-danger" *ngIf="createProduct.get('trademark')?.invalid && createProduct.get('trademark')?.touched &&-->
+<!--           createProduct.get('trademark')?.errors?.required">Thương hiệu không được để trống.-->
+<!--                    </div>-->
+<!--                  </div>-->
+<!--                </div>-->
                 <div class="col-md-3 mb-3"></div>
                 <div class="col-md-3 mb-3">
                   <button type="reset" class="btn btn-secondary" mat-button mat-dialog-close [routerLink]="['/product-list']">Hủy</button>

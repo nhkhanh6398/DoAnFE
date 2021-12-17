@@ -3,10 +3,15 @@
   <h2 class="text-center mt-3" style="color: darkblue; font-size: 35px">DANH SÁCH SẢN PHẨM</h2>
   <div class="row mt-5 px-0 mx-0" style="height: 80%;">
     <div class="col-lg-12 col-sm-12">
-      <form>
+      <div class="row">
+        <div class="col-2 col-xl-2 col-sm-2 col-lg-2">
+          <button class="fas fa-plus-circle btn btn-success ml-5" [routerLink]="['/createProduct']">Thêm Mới Sản Phẩm</button>
+        </div>
+      </div>
+      <form [formGroup]="searchProduct" (ngSubmit)="search()" (keydown)="seacrhEnter($event)">
         <div class="row mb-2">
           <div class="col-2 col-xl-2 col-sm-2 col-lg-2">
-            <button class="fas fa-plus-circle btn btn-success ml-5" [routerLink]="['/createProduct']">Thêm Mới Sản Phẩm</button>
+
           </div>
           <div class="col-6 col-xl-6 col-sm-6 col-lg-6">
           </div>
@@ -26,7 +31,7 @@
             <th class="text-center ">Ảnh SP</th>
             <th class="text-center ">Tên SP</th>
             <th class="text-center ">Loại SP</th>
-            <th class="text-center ">Hãng</th>
+            <th class="text-center ">Thương Hiệu</th>
             <th class="text-center ">Giá</th>
             <th class="text-center ">Số Lượng</th>
             <th class="text-center ">Chức Năng</th>
@@ -39,7 +44,7 @@
             <td><img [src]="'assets/img/' +list.productImage" alt="" width="150px" height="100px"></td>
             <td>{{list.productName}}</td>
             <td>{{list.categories?.categoryName}}</td>
-            <td>{{list.suppliers?.suppliersName}}</td>
+            <td>{{list.trademark}}</td>
             <td>{{list.productPrice|currency: "VND"}}</td>
             <td>{{list.productQuantity}}</td>
             <td class="text-center">
@@ -81,4 +86,5 @@
     </li>
   </ul>
 </nav>
+
 <app-footer></app-footer>

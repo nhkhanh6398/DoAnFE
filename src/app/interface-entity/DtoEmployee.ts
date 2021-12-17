@@ -3,7 +3,7 @@ import {IPosition} from "./IPosition";
 export class DtoEmployee {
   id: string;
   nameEmployee: string;
-  dateOfBirth: Date;
+  dateOfBirth: string;
   idCard: string;
   salary: number;
   phoneNumber: string;
@@ -13,7 +13,7 @@ export class DtoEmployee {
   avatar: string;
   positionId: IPosition;
 
-  constructor(id: string, nameEmployee: string, dateOfBirth: Date, idCard: string, salary: number, phone: string, email: string, address: string, level: string, avatar: string, position: IPosition) {
+  constructor(id: string, nameEmployee: string, dateOfBirth: string, idCard: string, salary: number, phone: string, email: string, address: string, level: string, avatar: string, position: IPosition) {
     this.id = id;
     this.nameEmployee = nameEmployee;
     this.dateOfBirth = dateOfBirth;

@@ -4,16 +4,19 @@ export class UpdateProduct {
   productQuantity: number;
   productPrice: number;
   productImage: string;
-  categoriId: number;
-  suppliersId: number;
+  detail: string;
+  trademark:string;
+  categoriesId: number;
 
-  constructor(productId: string, productName: string, productQuantity: number, productPrice: number, productImage: string, categoriId: number, suppliersId: number) {
+
+  constructor(productId: string, productName: string, productQuantity: number, productPrice: number, productImage: string, detail: string, trademark: string, categoriesId: number) {
     this.productId = productId;
     this.productName = productName;
     this.productQuantity = productQuantity;
     this.productPrice = productPrice;
     this.productImage = productImage;
-    this.categoriId = categoriId;
-    this.suppliersId = suppliersId;
+    this.detail = detail;
+    this.trademark = trademark;
+    this.categoriesId = categoriesId;
   }
 }

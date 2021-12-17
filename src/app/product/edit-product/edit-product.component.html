@@ -54,48 +54,53 @@
            editProduct.get('productImage')?.errors?.required">Hình ảnh không được để trống.
                   </div>
                 </div>
+                <div class="mb-3 col-md-12">
+                  <label class="form-label">Mô Tả Sản Phẩm: <span style="color: red">(*)</span></label>
+                  <textarea rows="4" cols="50" class="form-control" formControlName="detail"
+                            placeholder="Nhập mô tả" required> </textarea>
+                  <div class="alert alert-danger" *ngIf="editProduct.get('detail')?.invalid && editProduct.get('detail')?.touched &&
+           editProduct.get('detail')?.errors?.required">Mô tả không được để trống.
+                  </div>
+                </div>
                 <div class="col-md-6">
                   <label class="form-label mt-2">Thể Loại: <span style="color: red">(*)</span></label>
                   <div class="input-group mb-3">
-                    <select class="form-control" formControlName="categories" >
+                    <select class="form-control" formControlName="categoriesId">
                       <option value=0>Chọn thể loại</option>
                       <option *ngFor="let catObj of categoryList"
                               [ngValue]="catObj.categoryId">{{catObj?.categoryName}}</option>
                     </select>
                   </div>
-                  <div *ngIf="editProduct.controls.categories.invalid">
-                    <div class="alert alert-danger"  *ngIf="editProduct.controls.categories.errors?.notNull">Loại đồ không được để
+                  <div *ngIf="editProduct.controls.categoriesId.invalid">
+                    <div class="alert alert-danger" *ngIf="editProduct.controls.categoriesId.errors?.notNull">Loại đồ
+                      không được để
                       trống.
                     </div>
                   </div>
                 </div>
                 <div class="col-md-6">
-                  <label class="form-label mt-2">Hãng Sản Xuất: <span style="color: red">(*)</span></label>
+                  <label class="form-label mt-2">Thương Hiệu: <span style="color: red">(*)</span></label>
                   <div class="input-group mb-3">
-                    <select class="form-control" id="suppliers" formControlName="suppliers" >
-                      <option value=0>Chọn hãng sản xuất</option>
-                      <option *ngFor=" let suppliers of suppliersList"
-                              [ngValue]="suppliers.suppliersId">{{suppliers?.suppliersName}}</option>
-                    </select>
-                  </div>
-                  <div *ngIf="editProduct.controls.suppliers.invalid">
-                    <div class="alert alert-danger"  *ngIf="editProduct.controls.suppliers.errors?.notNull">Hãng sản xuất không được để
-                      trống.
+                    <input type="text" class="form-control" formControlName="trademark"
+                           placeholder="Nhập thương hiệu" required>
+                    <div class="alert alert-danger" *ngIf="editProduct.get('trademark')?.invalid && editProduct.get('trademark')?.touched &&
+           editProduct.get('trademark')?.errors?.required">Thương hiệu không được để trống.
                     </div>
-                  </div>
                 </div>
               </div>
+              </div>
             </mat-dialog-content>
-            <mat-dialog-actions align="center" >
+            <mat-dialog-actions align="center">
               <div class="row">
-                  <div class="col-md-3 mb-3">
-                    <button type="reset" class="btn btn-secondary" mat-button mat-dialog-close>Hủy</button>
-                  </div>
-                  <div class="col-md-9 mb-3">
-                    <button type="submit" class="btn btn-success" [disabled]="editProduct.invalid" [mat-dialog-close]="true" cdkFocusInitial>Lưu sản phẩm
-                    </button>
-                  </div>
+                <div class="col-md-3 mb-3">
+                  <button type="reset" class="btn btn-secondary" mat-button mat-dialog-close>Hủy</button>
                 </div>
+                <div class="col-md-9 mb-3">
+                  <button type="submit" class="btn btn-success" [disabled]="editProduct.invalid"
+                          [mat-dialog-close]="true" cdkFocusInitial>Lưu sản phẩm
+                  </button>
+                </div>
+              </div>
             </mat-dialog-actions>
           </form>
         </div>

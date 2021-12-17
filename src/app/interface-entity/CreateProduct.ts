@@ -7,18 +7,19 @@ export class CreateProduct {
   productQuantity: number;
   productPrice: number;
   productImage: string;
+  detail: string;
+  trademark: string;
   categoriesId: ICategories;
-  suppliersId: ISuppliers;
 
 
-  constructor(productId: string, productName: string, productQuantity: number, productPrice: number, productImage: string, categoriesId: ICategories, suppliersId: ISuppliers) {
+  constructor(productId: string, productName: string, productQuantity: number, productPrice: number, productImage: string, detail: string, trademark: string, categoriesId: ICategories) {
     this.productId = productId;
     this.productName = productName;
     this.productQuantity = productQuantity;
     this.productPrice = productPrice;
     this.productImage = productImage;
+    this.detail = detail;
+    this.trademark = trademark;
     this.categoriesId = categoriesId;
-    this.suppliersId = suppliersId;
   }
-
 }

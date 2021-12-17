@@ -1,6 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FooterComponent } from './footer/footer.component';
+import { HeaderViewComponent } from './header-view/header-view.component';
+import {RouterModule} from "@angular/router";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 
 
 
@@ -9,13 +12,18 @@ import { FooterComponent } from './footer/footer.component';
   declarations: [
 
 
-    FooterComponent
+    FooterComponent,
+      HeaderViewComponent
   ],
-  exports: [
-    FooterComponent
-  ],
+    exports: [
+        FooterComponent,
+        HeaderViewComponent
+    ],
   imports: [
     CommonModule,
+    RouterModule,
+    FormsModule,
+    ReactiveFormsModule,
 
   ]
 })

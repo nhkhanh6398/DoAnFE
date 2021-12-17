@@ -9,7 +9,8 @@ export interface IProduct {
   productQuantity: number,
   productPrice: number,
   productImage: string,
+  detail: string,
+  trademark: string,
   categories: ICategories,
-  suppliers: ISuppliers
 
 }

@@ -18,10 +18,10 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     // @ts-ignore
-    this.idProduct = this.route.snapshot.paramMap.get('productId');
+    // this.idProduct = this.route.snapshot.paramMap.get('productId');
 
-    this.productService.getAllProduct().subscribe((data) => {
-      this.listProduct = data.content;
+    this.productService.getListProduct().subscribe((data) => {
+      this.listProduct = data;
     })
   }
 

@@ -13,13 +13,17 @@ import {CreateProduct} from "../interface-entity/CreateProduct";
 export class ProductService {
   product!: IProduct[];
   readonly URL = "http://localhost:8080/product/";
+  readonly URL_SEARCH = "http://localhost:8080/product/search";
   readonly URL_SUPPLIERS = "http://localhost:8080/suppliers/";
 
   constructor(private httpClient: HttpClient) {
   }
 
-  getAllProduct():Observable<IProduct> {
-    return this.httpClient.get<IProduct>(this.URL + 'list');
+  getAllProduct():Observable<any> {
+    return this.httpClient.get<any>(this.URL + 'list');
+  }
+  getListProduct():Observable<any>{
+    return this.httpClient.get<any>(this.URL + 'listAllProduct');
   }
   getPageProduct(pageNum: number):Observable<any>{
     return this.httpClient.get<any>(this.URL+'list?page='+pageNum);
@@ -39,7 +43,11 @@ export class ProductService {
   getAllCategories():Observable<ICategories[]>{
     return this.httpClient.get<ICategories[]>(this.URL + 'catagory');
   }
-  getAllSuppliers():Observable<ISuppliers[]>{
-    return this.httpClient.get<ISuppliers[]>(this.URL_SUPPLIERS+'list');
+
+  searchPageProduct(pageNumber: number, key: string):Observable<any>{
+    return this.httpClient.get<any>(this.URL_SEARCH + '?page='+ pageNumber +'&key=' + key);
+  }
+  searchProduct(key:string):Observable<any>{
+    return this.httpClient.get<any>(this.URL_SEARCH + '?key=' +key);
   }
 }

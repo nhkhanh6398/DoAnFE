@@ -1,16 +1,54 @@
-<ngx-slick-carousel class="carousel"
-                    #slickModal="slick-carousel"
-                    [config]="slideConfig"
-                    (init)="slickInit($event)"
-                    (breakpoint)="breakpoint($event)"
-                    (afterChange)="afterChange($event)"
-                    (beforeChange)="beforeChange($event)">
-  <div ngxSlickItem *ngFor="let list of listProduct" class="slide">
-    <img [src]="'assets/img/' +list.productImage" alt="" width="100%">
-  </div>
-</ngx-slick-carousel>
+<app-header-view></app-header-view>
+<div class="container">
+  <div class="row mt-5" style="background-color: #FFFAFA;border-radius:10px ">
+    <div class="col-5 col-md-5 col-md-5 col-sm-12">
+      <img [src]="'assets/img/' + product.productImage" width="100%">
+    </div>
 
-<!--<button (click)="addSlide()">Add</button>-->
-<!--<button (click)="removeSlide()">Remove</button>-->
-<!--<button (click)="slickModal.slickGoTo(2)">slickGoto 2</button>-->
-<!--<button (click)="slickModal.unslick()">unslick</button>-->
+    <div class="col-7 col-md-7 col-md-7 col-sm-12">
+
+      <div class="suggestion__items-title">{{product.productName}}</div>
+      <div class="suggestion__items-rate">
+        <div class="rate__stars">
+          <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" size="16" color="#fdd836"
+               height="14" width="14" xmlns="http://www.w3.org/2000/svg" style="color: rgb(253, 216, 54);">
+            <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"></path>
+          </svg>
+          <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" size="16" color="#fdd836"
+               height="14" width="14" xmlns="http://www.w3.org/2000/svg" style="color: rgb(253, 216, 54);">
+            <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"></path>
+          </svg>
+          <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" size="16" color="#fdd836"
+               height="14" width="14" xmlns="http://www.w3.org/2000/svg" style="color: rgb(253, 216, 54);">
+            <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"></path>
+          </svg>
+          <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" size="16" color="#fdd836"
+               height="14" width="14" xmlns="http://www.w3.org/2000/svg" style="color: rgb(253, 216, 54);">
+            <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"></path>
+          </svg>
+          <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" size="16" color="#fdd836"
+               height="14" width="14" xmlns="http://www.w3.org/2000/svg" style="color: rgb(253, 216, 54);">
+            <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"></path>
+          </svg>
+        </div>
+        <div class="suggestion__pseudo"></div>
+        <div class="suggestion__items-sold">Số lượng còn lại {{product.productQuantity}}</div>
+      </div>
+      <div class="row">
+        <p class="thuong_hieu mt-1">Thương hiệu: {{product.trademark}}</p>
+      </div>
+      <div class="row price mt-1">
+        <div>{{product.productPrice|currency:'VND'}}</div>
+      </div>
+      <div class="row">
+        <div class="col-6 col-md-6 col-sm-6">
+          <button class="btn btn-cart"><i class="fas fa-cart-plus"></i>Thêm Vào Giỏ Hàng</button>
+        </div>
+        <div class="col-6 col-md-6 col-sm-6">
+          <button class="btn btn-buy">Mua Ngay</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<app-footer></app-footer>
