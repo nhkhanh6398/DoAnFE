@@ -1,22 +1,24 @@
-import {Component, Inject, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {IProduct} from "../../interface-entity/IProduct";
+import {FormControl, FormGroup} from "@angular/forms";
 import {ProductService} from "../../service/product.service";
 import {ActivatedRoute, Router} from "@angular/router";
-import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {CartService} from "../../service/cart.service";
 import {AlertService} from "../../alert.service";
-import {FormControl, FormGroup} from "@angular/forms";
 import {LoginService} from "../../service/login.service";
 import {ICategories} from "../../interface-entity/ICategories";
 import {RegistrationComponent} from "../registration/registration.component";
 import {CustomerService} from "../../service/customer.service";
+import {MatDialog} from "@angular/material/dialog";
+import {NgxSpinnerService} from "ngx-spinner";
 
 @Component({
-  selector: 'app-detail-view-product',
-  templateUrl: './detail-view-product.component.html',
-  styleUrls: ['./detail-view-product.component.css']
+  selector: 'app-payment',
+  templateUrl: './payment.component.html',
+  styleUrls: ['./payment.component.css']
 })
-export class DetailViewProductComponent implements OnInit {
+export class PaymentComponent implements OnInit {
+
   product!: IProduct;
   listProduct: IProduct[] = [];
   productId: string = "";
@@ -25,10 +27,10 @@ export class DetailViewProductComponent implements OnInit {
   searchProduct!: FormGroup;
   username: string ='';
   listCategories: ICategories[]=[];
-  quantity:number = 1;
-  constructor(private productService: ProductService, private router: Router, private activatedRoute: ActivatedRoute,
-              private cartService: CartService, private alertService: AlertService,private loginService:LoginService,
-              private customerService: CustomerService, private dialog: MatDialog) {
+  constructor( private router: Router, private activatedRoute: ActivatedRoute,
+              private productService: ProductService, private loginService: LoginService, private customerService: CustomerService,
+              private cartService: CartService,  private alertService: AlertService,
+              private route: ActivatedRoute, private dialog: MatDialog, private spinner: NgxSpinnerService) {
   }
 
   ngOnInit(): void {
@@ -58,9 +60,8 @@ export class DetailViewProductComponent implements OnInit {
     })
   }
 
-  add(productId: string, productName: string, productPrice: number,quantity:number) {
-    console.log(quantity);
-    this.cartService.addToGioHang(productId, productName, productPrice,quantity);
+  add(productId: string, productName: string, productPrice: number) {
+    // this.cartService.addToGioHang(productId, productName, productPrice);
     this.alertService.showAlertSuccess("Thêm giỏ hàng thành công");
     this.ngOnInit();
   }
@@ -115,19 +116,5 @@ export class DetailViewProductComponent implements OnInit {
   searchByCategories(categoryName: any) {
     this.productService.key = categoryName;
     this.router.navigateByUrl("/home").then();
-  }
-
-  quantity_up() {
-    var quantityUp = 1;
-    this.quantity += quantityUp;
-  }
-
-  quantity_down() {
-    var quantityDown = 1;
-    this.quantity -= quantityDown;
-    if (this.quantity ==0){
-      alert("Số lượng không được bé hơn 1");
-      this.quantity = 1;
-    }
   }
 }

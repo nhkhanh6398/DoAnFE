@@ -3,65 +3,66 @@ import {AbstractControl, FormControl, FormGroup, ValidationErrors, Validators} f
 import {CustomerService} from "../../service/customer.service";
 import {Router} from "@angular/router";
 import {AlertService} from "../../alert.service";
-import {DtoCustomer} from "../../interface-entity/DtoCustomer";
 import {NgxSpinnerService} from "ngx-spinner";
+import {DtoCustomer} from "../../interface-entity/DtoCustomer";
 import {IAccount} from "../../interface-entity/IAccount";
-import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material/dialog";
+import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 
-
-@Component({
-  selector: 'app-create-customer',
-  templateUrl: './create-customer.component.html',
-  styleUrls: ['./create-customer.component.css']
-})
-export class CreateCustomerComponent implements OnInit {
-  createCustomer!: FormGroup;
-  idCustomer: string = "";
-  createKH!: DtoCustomer;
-  accountList:IAccount[]=[];
-  constructor(private customerService: CustomerService, private router: Router, private alertService: AlertService,
-              private spinner: NgxSpinnerService) {
-  }
-
-  ngOnInit(): void {
-    this.customerService.getAllAccount().subscribe((data)=>{
-      this.accountList = data;
-      console.log(this.accountList);
-    })
-    this.createCustomer = new FormGroup({
-      idCustomer: new FormControl("", [Validators.required]),
-      nameCustomer: new FormControl("", [Validators.required]),
-      phone: new FormControl("", [Validators.required]),
-      email: new FormControl("", [Validators.required, Validators.pattern(/^[A-Za-z_.0-9]+@+[a-z]+.[a-z]+.[a-z]+/)]),
-      idCard: new FormControl("", [Validators.required]),
-      address: new FormControl("", [Validators.required]),
-      account: new FormControl("", [Validators.required]),
-      passwork: new FormControl("", [Validators.required]),
-    })
-  }
-
-  showSpinner(name: string) {
-    this.spinner.show(name);
-  }
-
-  check(form: AbstractControl): ValidationErrors | null {
-    const accountCheck = form.value.account;
-    for (let i = 0; i < this.accountList.length; i++) {
-      if (accountCheck === this.accountList[i].account) {
-        return {check: true}
+interface ValidatorFn {
+  (control: AbstractControl): ValidationErrors | null
+}
+function checkExistAccount(account:IAccount[]):ValidatorFn {
+  return (control:AbstractControl): ValidationErrors | null =>{
+    for (let i = 0; i< account.length; i++){
+      if(control.value === account[i].account){
+        return {checkExistAccount: true}
       }
     }
     return null;
+  };
+}
+
+@Component({
+  selector: 'app-registration',
+  templateUrl: './registration.component.html',
+  styleUrls: ['./registration.component.css']
+})
+export class RegistrationComponent implements OnInit {
+  createCustomer!: FormGroup;
+  idCustomer: string = "";
+  createKH!: DtoCustomer;
+
+  constructor(private customerService: CustomerService, private router: Router, private alertService: AlertService,
+              private spinner: NgxSpinnerService,public dialogRef: MatDialogRef<RegistrationComponent>,
+              @Inject(MAT_DIALOG_DATA) public data: IAccount[]) {
+  }
+
+  ngOnInit(): void {
+    this.createCustomer = new FormGroup({
+      idCustomer: new FormControl("", [Validators.required]),
+      nameCustomer: new FormControl("", [Validators.required]),
+      phone: new FormControl("", [Validators.required,Validators.pattern('^(\\d{10,12})$')]),
+      email: new FormControl("", [Validators.required, Validators.pattern(/^[A-Za-z_.0-9]+@+[a-z]+.[a-z]+.[a-z]+/)]),
+      idCard: new FormControl("", [Validators.required]),
+      address: new FormControl("", [Validators.required]),
+      account: new FormControl("", [Validators.required,checkExistAccount(this.data)]),
+      passwork: new FormControl("", [Validators.required]),
+    })
   }
 
   create() {
     this.idCustomer = "KH" + Math.floor(Math.random() * 10000);
     const value = this.createCustomer.value;
+    value.idCard = "Trống";
+    value.address = "Trống";
     this.createKH = new DtoCustomer(this.idCustomer, value.nameCustomer, value.phone, value.email, value.idCard,
       value.address, value.account, value.passwork);
     this.customerService.createCustomer(this.createKH).subscribe(() => {
-      this.alertService.showAlertSuccess("Thêm thành công");
-      this.router.navigate(['/customer-list']);
+      this.alertService.showAlertSuccess("Tạo thành công");
     })
+  }
+
+  showSpinner(name: string) {
+    this.spinner.show(name);
   }
 }

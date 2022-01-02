@@ -1,6 +1,6 @@
 <div class="container-fluid ">
   <div class="row header" style="background: #3ba66b">
-    <div class="col-md-2 col-xl-2 col-sm-2 col-2">
+    <div class="col-md-2 col-xl-2 col-sm-12 col-2">
       <div class="nav-logo">
         <a [routerLink]="['/home']">
           <img class="ml-5" src="assets/img/logo.png" alt=" " width="90px">
@@ -22,15 +22,32 @@
           </div>
         </div>
       </form>
+      <ngx-slick-carousel class="carousel"
+                          #slickModal="slick-carousel"
+                          [config]="slideConfig"
+                          (init)="slickInit($event)"
+                          (breakpoint)="breakpoint($event)"
+                          (afterChange)="afterChange($event)"
+                          (beforeChange)="beforeChange($event)">
+        <div ngxSlickItem *ngFor="let categories of listCategories" class="slide ">
+          <a class="deal-flash" (click)="searchByCategories(categories.categoryName)">
+            <div class="m-1">
+              <h5 class="suggestion__items-title categoriesList">{{categories.categoryName}}</h5>
+            </div>
+          </a>
+        </div>
+      </ngx-slick-carousel>
     </div>
+
     <div class="col-xl-3 col-sm-3 col-md-3 dki-dnhap">
       <ul class="nav__mobile-list">
         <li class="nav__mobile-list-user">
           <p *ngIf="username===''"><i class="fas fa-user"></i><a routerLink="/login">Đăng nhập</a> <label>/</label> <a
-            href="">Đăng ký</a>
+            (click)="openRegistration()">Đăng ký</a>
           </p>
           <div *ngIf="username!=''" class="dropdown"><i class="fas fa-user dropbtn"> {{username}}</i>
             <div class="dropdown-content">
+              <a [routerLink]="['/detail-users', username]">Thông tin cá nhân</a>
               <a (click)="logOut()">Đăng xuất</a>
             </div>
           </div>

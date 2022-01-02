@@ -29,6 +29,7 @@ export class ListCustomerComponent implements OnInit {
     this.customerService.getAllCustomer().subscribe(data=>{
       // @ts-ignore
       this.listCustomer = data.content;
+      console.log(this.listCustomer);
       this.totalPagination = data.totalPages;
     })
   }

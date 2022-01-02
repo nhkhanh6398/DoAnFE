@@ -1,79 +1,10 @@
-
-
-body .slick-prev,
-body .slick-next {
-  height: 45px;
-  width: 40px;
-  background: grey !important;
-  z-index: 100;
-}
-.thuong_hieu{
-  font-size: 13px;
-  color: rgb(56, 56, 61);
-}
-.suggestion__items-title{
-  height: 100px;
-  font-size: 25px;
-  font-weight: 400;
-  margin: 16px 0 4px;
-  line-height: 20px;
-  color: rgb(56, 56, 61);
-  word-break: break-word;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
-  overflow: hidden;
-}
-
-.suggestion__items-rate{
-  display: flex;
-  align-items: center;
-}
-.rate__stars{
-  letter-spacing: -5px;
-}
-.suggestion__items-sold{
-  color: rgb(120, 120, 120);
-  font-size: 11px;
-  line-height: 14px;
-}
-.suggestion__pseudo{
-  width: 1px;
-  height: 9px;
-  background-color: rgb(199, 199, 199);
-  margin: 0 6px;
-}
-.suggestion__items-price{
-  margin-top: 4px;
-  display: flex;
-  align-items: center;
-}
-.btn-cart{
-  background: rgba(255,87,34,0.1);
-  color: #ee4d2d;
-  border: 1px solid;
-  width: 250px;
-  height: 48px;
-}
-.btn-buy{
-  color: #fff;
-  background: #ee4d2d;
-  width: 250px;
-  height: 48px;
-}
-.price{
-  text-align: center;
-  font-size: 1.875rem;
-  height: 100px;
-  line-height: 24px;
-  font-weight: 600;
-  color: #ee4d2d;
-  background: #fafafa;
-}
 .nav__mobile-list {
   margin-top: 24px;
   list-style: none;
   font-size: 1rem;
+}
+.nav-logo{
+  margin-top: 1rem;
 }
 ::placeholder {
   font-size: 70%;
@@ -158,37 +89,14 @@ body .slick-next {
   text-decoration: none;
   display: block;
 }
-.nav-logo{
-  margin-top: 1rem;
-}
+
 .dropdown-content a:hover {background-color: #ddd;}
 
 .dropdown:hover .dropdown-content {display: block;}
-/*header categories*/
 .deal-flash:hover{
   box-shadow: 0 6px 10px 6px rgba(0, 0, 0, 0.05), 0 8px 12px 8px rgba(0, 0, 0, 0.03);
   cursor: pointer;
   text-decoration: none;
-}
-.cart_quantity_button a {
-  text-decoration: none;
-  background: #F0F0E9;
-  color: #696763;
-  display: inline-block;
-  font-size: 16px;
-  height: 28px;
-  overflow: hidden;
-  text-align: center;
-  width: 35px;
-  float: left;
-  line-height: 28px;
-}
-.cart_quantity_input {
-  color: #696763;
-  float: left;
-  font-size: 16px;
-  text-align: center;
-  font-family: 'Roboto', sans-serif;
 }
 .slick-slider {
   width: 88%;

@@ -9,13 +9,15 @@ import {RouterModule} from "@angular/router";
 import {HeaderFooterModule} from "../header-footer/header-footer.module";
 import {AppModule} from "../app.module";
 import {RouteCustomerModule} from "./route-customer.module";
+import {DetailCustomerComponent} from "./detail-customer/detail-customer.component";
+import {MatDialogModule} from "@angular/material/dialog";
 
 
 
 @NgModule({
   declarations: [
 
-    CreateCustomerComponent,
+    DetailCustomerComponent,
     DeleteCustomerComponent,
     EditCustomerComponent
   ],
@@ -24,7 +26,9 @@ import {RouteCustomerModule} from "./route-customer.module";
     ReactiveFormsModule,
     RouterModule,
     HeaderFooterModule,
-    RouteCustomerModule
+    RouteCustomerModule,
+    MatDialogModule,
+
   ]
 })
 export class CustomerModule { }

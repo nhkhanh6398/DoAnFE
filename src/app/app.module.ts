@@ -23,6 +23,9 @@ import {RouterHomeModule} from "./home-page/router-home.module";
 import { SlickCarouselModule } from 'ngx-slick-carousel';
 import { NgxImageZoomModule } from 'ngx-image-zoom';
 import {ListCustomerComponent} from "./customer/list-customer/list-customer.component";
+import {CreateCustomerComponent} from "./customer/create-customer/create-customer.component";
+import { NgxSpinnerModule } from "ngx-spinner";
+import {CookieService} from "ngx-cookie-service";
 
 
 
@@ -36,6 +39,7 @@ import {ListCustomerComponent} from "./customer/list-customer/list-customer.comp
     HeaderComponent,
     CreateEmployeeComponent,
     ListCustomerComponent,
+    CreateCustomerComponent,
   ],
   imports: [
     BrowserModule,
@@ -53,10 +57,11 @@ import {ListCustomerComponent} from "./customer/list-customer/list-customer.comp
     ReactiveFormsModule,
     RouterHomeModule,
     SlickCarouselModule,
-    NgxImageZoomModule
+    NgxImageZoomModule,
+    NgxSpinnerModule,
 
   ],
-  providers: [],
+  providers: [CookieService],
   exports: [
     HeaderComponent,
   ],

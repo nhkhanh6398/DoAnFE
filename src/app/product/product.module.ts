@@ -11,6 +11,7 @@ import {RouterModule} from "@angular/router";
 import {DetailProductComponent} from "./detail-product/detail-product.component";
 import {HeaderFooterModule} from "../header-footer/header-footer.module";
 import {AppModule} from "../app.module";
+import {RouteProductModule} from "./route-product.module";
 
 
 
@@ -33,6 +34,7 @@ import {AppModule} from "../app.module";
     MatButtonModule,
     RouterModule,
     HeaderFooterModule,
+    RouteProductModule
 
 
 

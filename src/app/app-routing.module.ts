@@ -7,13 +7,14 @@ import {CreateEmployeeComponent} from "./employee/create-employee/create-employe
 import {HomeComponent} from "./home-page/home/home.component";
 import {DetailProductComponent} from "./product/detail-product/detail-product.component";
 import {DetailViewProductComponent} from "./home-page/detail-view-product/detail-view-product.component";
+import {AuthGuard} from "./service/AuthGuard";
 
 const routes: Routes = [
-  {path: "product-list",component: ListProductComponent},
-  {path: "createProduct",component: CreateProductComponent},
+
+
   //employee
-  {path: "employee-list",component: ListEmployeeComponent},
-  {path: "createEmployee",component: CreateEmployeeComponent},
+  {path: "employee-list",component: ListEmployeeComponent,canActivate:[AuthGuard]},
+  {path: "createEmployee",component: CreateEmployeeComponent,canActivate:[AuthGuard]},
   //
   //home
   {path:"",component: HomeComponent},
@@ -23,6 +24,7 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
+  providers:[AuthGuard]
 })
 export class AppRoutingModule { }

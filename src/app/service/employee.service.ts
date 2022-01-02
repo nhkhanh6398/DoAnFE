@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {IEmployee} from "../interface-entity/IEmployee";
 import {DtoEmployee} from "../interface-entity/DtoEmployee";
 import {IPosition} from "../interface-entity/IPosition";
+import {LoginService} from "./login.service";
 
 @Injectable({
   providedIn: 'root'
@@ -11,30 +12,41 @@ import {IPosition} from "../interface-entity/IPosition";
 export class EmployeeService {
   readonly URL= "http://localhost:8080/employee/";
   readonly URL_SEARCH = "http://localhost:8080/employee/search";
-  constructor(private httpClient: HttpClient) { }
-  getAllEmployee():Observable<IEmployee>{
-    return this.httpClient.get<IEmployee>(this.URL+'list');
+  httpOptions: any;
+
+  constructor(private httpClient: HttpClient,private loginService:LoginService) {
+    this.httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': this.loginService.getToken(),
+        'Access-Control-Allow-Origin': 'http://localhost:4200/',
+        'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS'
+      }),
+    };
   }
-  getListPosition():Observable<IPosition[]>{
-    return this.httpClient.get<IPosition[]>(this.URL+'position');
+  getAllEmployee():Observable<any>{
+    return this.httpClient.get<IEmployee>(this.URL+'list',this.httpOptions);
   }
-  getEmployeeById(id:string):Observable<IEmployee>{
-    return this.httpClient.get<IEmployee>(this.URL+'getInformation/'+id);
+  getListPosition():Observable<any>{
+    return this.httpClient.get<any>(this.URL+'position',this.httpOptions);
   }
-  deleteEmployee(id:string):Observable<IEmployee>{
-    return this.httpClient.delete<IEmployee>(this.URL+'delete/'+id);
+  getEmployeeById(id:string):Observable<any>{
+    return this.httpClient.get<any>(this.URL+'getInformation/'+id,this.httpOptions);
   }
-  createEmployee(employee: DtoEmployee):Observable<DtoEmployee>{
-    return this.httpClient.post<DtoEmployee>(this.URL + 'create', employee);
+  deleteEmployee(id:string):Observable<any>{
+    return this.httpClient.delete<any>(this.URL+'delete/'+id,this.httpOptions);
   }
-  updateEmployee(employee:DtoEmployee):Observable<DtoEmployee>{
-    return this.httpClient.put<DtoEmployee>(this.URL+'edit',employee);
+  createEmployee(employee: DtoEmployee):Observable<any>{
+    return this.httpClient.post<any>(this.URL + 'create', employee,this.httpOptions);
+  }
+  updateEmployee(employee:DtoEmployee):Observable<any>{
+    return this.httpClient.put<any>(this.URL+'edit',employee,this.httpOptions);
   }
   getPageProduct(number: number):Observable<any> {
-    return this.httpClient.get<any>(this.URL + 'list?page='+number);
+    return this.httpClient.get<any>(this.URL + 'list?page='+number,this.httpOptions);
   }
   searchPageEmployee(pageNumber: number,key: string):Observable<any>{
-    return this.httpClient.get<any>(this.URL_SEARCH + '?page='+pageNumber + '&key='+key);
+    return this.httpClient.get<any>(this.URL_SEARCH + '?page='+pageNumber + '&key='+key,this.httpOptions);
   }
   searchEmployee(key:string):Observable<any>{
     return this.httpClient.get<any>(this.URL_SEARCH + '?key='+key);

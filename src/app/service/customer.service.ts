@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {ICustomer} from "../interface-entity/ICustomer";
 import {IEmployee} from "../interface-entity/IEmployee";
 import {DtoEmployee} from "../interface-entity/DtoEmployee";
 import {DtoCustomer} from "../interface-entity/DtoCustomer";
+import {LoginService} from "./login.service";
 
 @Injectable({
   providedIn: 'root'
@@ -12,23 +13,40 @@ import {DtoCustomer} from "../interface-entity/DtoCustomer";
 export class CustomerService {
   readonly URL="http://localhost:8080/customer/";
   readonly URL_SEARCH = "http://localhost:8080/customer/search";
-  constructor(private httpClient: HttpClient) { }
-  getAllCustomer():Observable<ICustomer>{
-    return this.httpClient.get<ICustomer>(this.URL + 'list');
+  httpOptions: any;
+  constructor(private httpClient: HttpClient,private loginService:LoginService) {
+
+    this.httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': this.loginService.getToken(),
+        'Access-Control-Allow-Origin': 'http://localhost:4200/',
+        'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS'
+      }),
+    };
+  }
+  getAllCustomer():Observable<any>{
+    return this.httpClient.get<any>(this.URL + 'list',this.httpOptions);
+  }
+  getAllAccount():Observable<any>{
+    return this.httpClient.get<any>(this.URL + 'account');
   }
   getCustomerById(id:string):Observable<ICustomer> {
     return this.httpClient.get<ICustomer>(this.URL + 'getInformation/' + id);
   }
-  deleteCustomer(id:string):Observable<ICustomer>{
-    return this.httpClient.delete<ICustomer>(this.URL+'delete/'+id);
+  deleteCustomer(id:string):Observable<any>{
+    return this.httpClient.delete<ICustomer>(this.URL+'delete/'+id,this.httpOptions);
+  }
+  getCustomerByAccount(account:string):Observable<any>{
+    return this.httpClient.get<any>(this.URL+'detailCustomerByAccount/'+ account);
   }
   createCustomer(customer: DtoCustomer):Observable<DtoCustomer>{
     return this.httpClient.post<DtoCustomer>(this.URL + 'create', customer);
   }
-  updateCustomer(customer:DtoCustomer):Observable<DtoCustomer>{
-    return this.httpClient.put<DtoCustomer>(this.URL+'edit',customer);
+  updateCustomer(customer:DtoCustomer):Observable<any>{
+    return this.httpClient.put<any>(this.URL+'edit',customer,this.httpOptions);
   }
   searchPageCustomer(pageNumber: number, key:string):Observable<any>{
-    return this.httpClient.get<any>(this.URL_SEARCH + '?page='+ pageNumber +'&key=' + key);
+    return this.httpClient.get<any>(this.URL_SEARCH + '?page='+ pageNumber +'&key=' + key,this.httpOptions);
   }
 }

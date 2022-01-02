@@ -13,6 +13,10 @@ import {MatDialogModule} from "@angular/material/dialog";
 import {ReactiveFormsModule} from "@angular/forms";
 import {LoginComponent} from "./login/login.component";
 import {NgxImageZoomModule} from "ngx-image-zoom";
+import {DetailCartComponent} from "./detail-cart/detail-cart.component";
+import {RegistrationComponent} from "./registration/registration.component";
+import {DetailUsersComponent} from "./detail-users/detail-users.component";
+import {PaymentComponent} from "./payment/payment.component";
 
 
 
@@ -23,7 +27,11 @@ import {NgxImageZoomModule} from "ngx-image-zoom";
   declarations: [
     HomeComponent,
     DetailViewProductComponent,
-    LoginComponent
+    LoginComponent,
+    DetailCartComponent,
+    DetailUsersComponent,
+    RegistrationComponent,
+    PaymentComponent
   ],
   exports: [
 
