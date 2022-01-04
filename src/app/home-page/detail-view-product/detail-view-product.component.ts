@@ -74,6 +74,7 @@ export class DetailViewProductComponent implements OnInit {
     this.loginService.removeToken();
     this.loginService.removeUserName();
     this.loginService.removeRole();
+    this.cartService.xoaHet();
     this.router.navigateByUrl("/login").then();
   }
   slideConfig = {"slidesToShow": 4, "slidesToScroll": 4};

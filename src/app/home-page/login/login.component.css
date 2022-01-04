@@ -180,6 +180,51 @@ img {
   background: -o-linear-gradient(bottom, #09203f 0%, #537895 100%);
   background: linear-gradient(to top, #09203f 0%, #537895 100%);
 }
+.back{
+  background: -webkit-linear-gradient(110deg, #f75758 0%, #fd8172 100%);
+  background: -o-linear-gradient(110deg, #f75758 0%, #fd8172 100%);
+  background: linear-gradient(-20deg, #f75758 0%, #fd8172 100%);
+  border: none;
+  margin-top: -78px;
+  margin-left: 305px;
+  margin-bottom: 20px;
+  width: 241px;
+  height: 58px;
+  text-transform: uppercase;
+  color: white;
+  border-radius: 10px;
+  position: relative;
+  z-index: 2;
+  font-weight: bold;
+  font-size: 20px;
+}
+.back:hover::after {
+  opacity: 1;
+}
+.back ::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  border-radius: 10px;
+  opacity: 0;
+  top: 0;
+  left: 0;
+  -webkit-transition: 0.3s ease-in-out;
+  -o-transition: 0.3s ease-in-out;
+  transition: 0.3s ease-in-out;
+  right: 0;
+  bottom: 0;
+  background: -webkit-gradient(
+    linear,
+    left bottom,
+    left top,
+    from(#09203f),
+    to(#537895)
+  );
+  background: -webkit-linear-gradient(bottom, #09203f 0%, #537895 100%);
+  background: -o-linear-gradient(bottom, #09203f 0%, #537895 100%);
+  background: linear-gradient(to top, #09203f 0%, #537895 100%);
+}
 .login .container .remember-form {
   position: relative;
   margin-top: -30px;
@@ -187,6 +232,7 @@ img {
 .login .container .remember-form input[type="checkbox"] {
   margin-top: 9px;
 }
+
 .login .container .remember-form span {
   font-size: 18px;
   font-weight: normal;
@@ -328,6 +374,10 @@ img {
     height: 45px;
     margin-top: 100px;
   }
+  .back {
+    height: 45px;
+    margin-top: -63px;
+  }
   .login .container .login-form .remember-form {
     position: relative;
     margin-top: -14px;
@@ -372,49 +422,5 @@ img {
     opacity: 1;
   }
 }
-.back{
-  background: -webkit-linear-gradient(110deg, #f75758 0%, #fd8172 100%);
-  background: -o-linear-gradient(110deg, #f75758 0%, #fd8172 100%);
-  background: linear-gradient(-20deg, #f75758 0%, #fd8172 100%);
-  border: none;
-  margin-top: -78px;
-  margin-left: 305px;
-  margin-bottom: 20px;
-  width: 241px;
-  height: 58px;
-  text-transform: uppercase;
-  color: white;
-  border-radius: 10px;
-  position: relative;
-  z-index: 2;
-  font-weight: bold;
-  font-size: 20px;
-}
-.back:hover::after {
-  opacity: 1;
-}
-.back ::after {
-  content: "";
-  position: absolute;
-  z-index: -1;
-  border-radius: 10px;
-  opacity: 0;
-  top: 0;
-  left: 0;
-  -webkit-transition: 0.3s ease-in-out;
-  -o-transition: 0.3s ease-in-out;
-  transition: 0.3s ease-in-out;
-  right: 0;
-  bottom: 0;
-  background: -webkit-gradient(
-    linear,
-    left bottom,
-    left top,
-    from(#09203f),
-    to(#537895)
-  );
-  background: -webkit-linear-gradient(bottom, #09203f 0%, #537895 100%);
-  background: -o-linear-gradient(bottom, #09203f 0%, #537895 100%);
-  background: linear-gradient(to top, #09203f 0%, #537895 100%);
-}
+
 /*trả về sai mật khẩu*/

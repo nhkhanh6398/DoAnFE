@@ -49,4 +49,7 @@ export class CustomerService {
   searchPageCustomer(pageNumber: number, key:string):Observable<any>{
     return this.httpClient.get<any>(this.URL_SEARCH + '?page='+ pageNumber +'&key=' + key,this.httpOptions);
   }
+  getAccount(id:string):Observable<any>{
+    return this.httpClient.get<any>(this.URL + 'getByAccount/'+id);
+  }
 }

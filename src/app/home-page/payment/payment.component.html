@@ -5,60 +5,68 @@
         <a [routerLink]="['/home']">
           <img class="ml-5" src="assets/img/logo.png" alt=" " width="90px">
         </a>
-
       </div>
     </div>
     <div class="col-xl-5 col-md-5 col-sm-5 col-5 pt-3">
-      <form class="my-2 my-lg-0" [formGroup]="searchProduct" (ngSubmit)="search()">
-        <div class="row m-2">
-          <div class="col-8 col-sm-8 col-md-8">
-            <input class="form-control mr-sm-2" type="text" formControlName="key"
-                   placeholder="Tìm sản phẩm,thương hiệu hay danh mục mà bạn muốn... " aria-label="Search">
-          </div>
-          <div class="col-4 col-sm-4 col-md-4">
-            <button class="btn" style="background: #abdde5" type="submit"><i class="fas fa-search"></i> Tìm
-              Kiếm
-            </button>
-          </div>
-        </div>
-      </form>
-      <ngx-slick-carousel class="carousel"
-                          #slickModal="slick-carousel"
-                          [config]="slideConfig"
-                          (init)="slickInit($event)"
-                          (breakpoint)="breakpoint($event)"
-                          (afterChange)="afterChange($event)"
-                          (beforeChange)="beforeChange($event)">
-        <div ngxSlickItem *ngFor="let categories of listCategories" class="slide ">
-          <a class="deal-flash" (click)="searchByCategories(categories.categoryName)">
-            <div class="m-1">
-              <h5 class="suggestion__items-title categoriesList">{{categories.categoryName}}</h5>
-            </div>
-          </a>
-        </div>
-      </ngx-slick-carousel>
+      <h1 class="text-center pt-3" style="color: darkblue; font-size: 35px">THÔNG TIN ĐẶT HÀNG</h1>
     </div>
-
-    <div class="col-xl-3 col-sm-3 col-md-3 dki-dnhap">
-      <ul class="nav__mobile-list">
-        <li class="nav__mobile-list-user">
-          <p *ngIf="username===''"><i class="fas fa-user"></i><a routerLink="/login">Đăng nhập</a> <label>/</label> <a
-            (click)="openRegistration()">Đăng ký</a>
-          </p>
-          <div *ngIf="username!=''" class="dropdown"><i class="fas fa-user dropbtn"> {{username}}</i>
-            <div class="dropdown-content">
-              <a [routerLink]="['/detail-users', username]">Thông tin cá nhân</a>
-              <a (click)="logOut()">Đăng xuất</a>
-            </div>
-          </div>
-        </li>
-        <hr>
-      </ul>
-    </div>
-    <div class="col-xl-1 col-sm-1 col-md-1">
-      <a routerLink="/detail-cart"><i class="fas fa-shopping-cart cart"></i>
-        <p class="soluongcart">{{totalNumber}}</p></a>
-    </div>
-
-  </div>
+    <div class="col-xl-3 col-sm-3 col-md-3 dki-dnhap"></div>
 </div>
+</div>
+<div class="container-fluid">
+  <form class="row g-3 was-validated mt-3" [formGroup]="createPayment">
+    <div class="row">
+      <div class="mb-3 col-md-12">
+        <label for="nameProduct" class="form-label">Tên Người Nhận : <span
+          style="color: red">(*)</span></label>
+        <input type="text" class="form-control" id="nameProduct" formControlName="userName"
+               placeholder="Nhập tên khách hàng"
+               required>
+        <div class="alert alert-danger" *ngIf="createPayment.get('userName')?.invalid && createPayment.get('userName')?.touched &&
+           createPayment.get('userName')?.errors?.required">Người nhận không được để trống.
+        </div>
+      </div>
+      <div class="mb-3 col-md-12">
+        <label class="form-label">Địa Chỉ Nhận Hàng: <span style="color: red">(*)</span></label>
+        <input type="text" class="form-control" formControlName="address"
+               placeholder="Nhập địa chỉ" required>
+        <div class="alert alert-danger" *ngIf="createPayment.get('address')?.invalid && createPayment.get('address')?.touched &&
+           createPayment.get('address')?.errors?.required">Địa chỉ nhận hàng không được để trống.
+        </div>
+      </div>
+      <div class="mb-3 col-md-6">
+        <label class="form-label">Số Điện Thoại Người Nhận: <span style="color: red">(*)</span></label>
+        <input type="text" class="form-control" formControlName="phone"
+               placeholder="Nhập số điện thoại" required>
+        <div class="alert alert-danger" *ngIf="createPayment.get('phone')?.invalid && createPayment.get('phone')?.touched &&
+           createPayment.get('phone')?.errors?.required">Số điện thoại không được để trống.
+        </div>
+        <div class="alert alert-danger" *ngIf="createPayment.controls.phone?.errors?.pattern">Số điện thoại không đúng định dạng.
+        </div>
+      </div>
+      <div class="mb-3 col-md-6">
+        <label class="form-label">Tổng Số Tiền: </label>
+        <input type="text" class="form-control" formControlName="total"
+               placeholder="Tổng số tiền" readonly>
+      </div>
+
+      <div class="col-md-3 mb-3"></div>
+      <div class="col-md-3 mb-3">
+        <button type="reset" class="btn btn-secondary" mat-button mat-dialog-close
+                [routerLink]="['/detail-cart']">Hủy
+        </button>
+      </div>
+      <div class="col-md-3 mb-3">
+        <button type="submit" class="btn btn-success" [mat-dialog-close]="true" cdkFocusInitial
+        (click)="create()" [disabled]="createPayment.invalid">Đặt Hàng
+        </button>
+      </div>
+      <div class="col-md-3 mb-3"></div>
+    </div>
+    <div class="row">
+
+    </div>
+
+  </form>
+</div>
+

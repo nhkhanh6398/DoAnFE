@@ -8,7 +8,7 @@
 
       </div>
     </div>
-    <div class="col-xl-5 col-md-5 col-sm-5 col-5 pt-3">
+    <div class="col-xl-5 col-md-12 col-sm-12 col-5 pt-3">
       <form class="my-2 my-lg-0" [formGroup]="searchProduct" (ngSubmit)="search()">
         <div class="row m-2">
           <div class="col-8 col-sm-8 col-md-8">
@@ -83,7 +83,7 @@
     <td  class="text-center ">{{list.gia*list.soLuong}}</td>
     <td class="text-center">
       <button type="button" class=" border-0 btn btn-outline-danger" data-bs-toggle="modal"
-              data-bs-target="#exampleModalDelete" (click)="openDialogDelete(list.masp)"
+              data-bs-target="#exampleModalDelete" (click)="openDialogDelete(list.productId)"
       ><i class="fas fa-trash-alt"></i></button>
     </td>
   </tr>
@@ -93,7 +93,8 @@
     <td></td>
     <th  class="text-danger" scope="row">Tổng Tiền</th>
     <td class="text-center">{{toltal|currency:'VND'}}</td>
-    <td class="text-center"><button class="btn btn-outline-info" (click)="payment()">Thanh Toán</button></td>
+    <td class="text-center" *ngIf="username == '' "><button class="btn btn-outline-info" routerLink="/login">Đăng Nhập Để Thanh Toán</button></td>
+    <td class="text-center" *ngIf="username != '' "><button class="btn btn-outline-info" (click)="OpenPayment()">Thanh Toán</button></td>
   </tr>
   </tbody>
 </table>

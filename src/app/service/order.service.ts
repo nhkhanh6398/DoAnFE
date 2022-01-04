@@ -24,4 +24,7 @@ export class OrderService {
     return this.httpClient.post<any>(this.URL+'orders',dtoOrder);
 
   }
+  getOrdersByAccount(account: string):Observable<any>{
+    return this.httpClient.get<any>(this.URL+'getOrders/' + account);
+  }
 }

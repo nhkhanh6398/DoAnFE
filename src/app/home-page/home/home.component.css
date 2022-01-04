@@ -325,5 +325,14 @@ body .slick-next {
 .categoriesList{
   color: white;
   text-decoration: none;
+  font-size: 13px;
+  font-weight: 400;
+  margin: 16px 0 4px;
+  line-height: 20px;
+  word-break: break-word;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
 }
 

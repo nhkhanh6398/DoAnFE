@@ -12,6 +12,7 @@ import {CustomerService} from "../../service/customer.service";
 import {MatDialog} from "@angular/material/dialog";
 import {OrderService} from "../../service/order.service";
 import {DtoOrder} from "../../interface-entity/DtoOrder";
+import {PaymentComponent} from "../payment/payment.component";
 
 @Component({
   selector: 'app-detail-cart',
@@ -64,6 +65,7 @@ export class DetailCartComponent implements OnInit {
     this.loginService.removeToken();
     this.loginService.removeUserName();
     this.loginService.removeRole();
+    this.cartService.xoaHet();
     this.router.navigateByUrl("/login").then();
   }
   slideConfig = {"slidesToShow": 4, "slidesToScroll": 4};
@@ -116,6 +118,7 @@ export class DetailCartComponent implements OnInit {
     //   var productId = this.listCart[i].masp;
     // }
     let account = this.loginService.getUserName();
+
     this.orderProduct = {
       ordersId:this.ordersId,
       idProduct: listProduct,
@@ -125,5 +128,19 @@ export class DetailCartComponent implements OnInit {
     this.orderService.setOrder(this.orderProduct).subscribe((data)=>{
       this.listCart = data;
     })
+  }
+
+  OpenPayment() {
+      const dialog = this.dialog.open(PaymentComponent, {
+        width: '1000px',
+        height: '100%',
+        disableClose: false,
+        autoFocus: false,
+      });
+      dialog.afterClosed().subscribe(result => {
+
+        this.ngOnInit();
+      })
+
   }
 }

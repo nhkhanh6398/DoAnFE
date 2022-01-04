@@ -49,8 +49,9 @@
       </div>
       <div>
         <button class='ghost-round full-width' [mat-dialog-close]="true" cdkFocusInitial
-                (click)="create()" (click)="showSpinner('sp3')">Tạo Tài Khoản</button>
+                (click)="create()" [disabled]="createCustomer.invalid">Tạo Tài Khoản</button>
       </div>
+
       </form>
     </div>
   </div>

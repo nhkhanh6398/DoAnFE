@@ -29,7 +29,6 @@ export class EditCustomerComponent implements OnInit {
       passwork : new FormControl("",[Validators.required]),
     });
     this.customerService.getCustomerById(this.data.idCustomer).subscribe((data)=>{
-
       this.updateCustomer.patchValue({
         idCustomer: data.idCustomer,
         nameCustomer: data.nameCustomer,

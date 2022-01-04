@@ -17,6 +17,7 @@ import {DetailCartComponent} from "./detail-cart/detail-cart.component";
 import {RegistrationComponent} from "./registration/registration.component";
 import {DetailUsersComponent} from "./detail-users/detail-users.component";
 import {PaymentComponent} from "./payment/payment.component";
+import {NgxSpinnerModule} from "ngx-spinner";
 
 
 
@@ -47,7 +48,8 @@ import {PaymentComponent} from "./payment/payment.component";
     RouterModule,
     RouterHomeModule,
     SlickCarouselModule,
-    NgxImageZoomModule
+    NgxImageZoomModule,
+    NgxSpinnerModule
   ]
 })
 export class HomePageModule { }

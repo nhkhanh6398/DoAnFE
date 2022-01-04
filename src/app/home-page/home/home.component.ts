@@ -109,6 +109,7 @@ export class HomeComponent implements OnInit {
     this.loginService.removeToken();
     this.loginService.removeUserName();
     this.loginService.removeRole();
+    this.cartService.xoaHet();
     this.router.navigateByUrl("/login").then();
   }
 

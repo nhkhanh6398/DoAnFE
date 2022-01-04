@@ -3,7 +3,7 @@ import {AbstractControl, FormControl, FormGroup, ValidationErrors, Validators} f
 import {CustomerService} from "../../service/customer.service";
 import {Router} from "@angular/router";
 import {AlertService} from "../../alert.service";
-import {NgxSpinnerService} from "ngx-spinner";
+import {NgxSpinnerService} from "ngx-spinner"
 import {DtoCustomer} from "../../interface-entity/DtoCustomer";
 import {IAccount} from "../../interface-entity/IAccount";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
@@ -39,30 +39,35 @@ export class RegistrationComponent implements OnInit {
 
   ngOnInit(): void {
     this.createCustomer = new FormGroup({
-      idCustomer: new FormControl("", [Validators.required]),
       nameCustomer: new FormControl("", [Validators.required]),
       phone: new FormControl("", [Validators.required,Validators.pattern('^(\\d{10,12})$')]),
       email: new FormControl("", [Validators.required, Validators.pattern(/^[A-Za-z_.0-9]+@+[a-z]+.[a-z]+.[a-z]+/)]),
-      idCard: new FormControl("", [Validators.required]),
-      address: new FormControl("", [Validators.required]),
       account: new FormControl("", [Validators.required,checkExistAccount(this.data)]),
       passwork: new FormControl("", [Validators.required]),
     })
   }
 
   create() {
-    this.idCustomer = "KH" + Math.floor(Math.random() * 10000);
+    console.log("aaaa")
     const value = this.createCustomer.value;
     value.idCard = "Trống";
     value.address = "Trống";
-    this.createKH = new DtoCustomer(this.idCustomer, value.nameCustomer, value.phone, value.email, value.idCard,
-      value.address, value.account, value.passwork);
-    this.customerService.createCustomer(this.createKH).subscribe(() => {
-      this.alertService.showAlertSuccess("Tạo thành công");
-    })
+    if (this.createCustomer.valid) {
+      console.log("bbbbb");
+      this.idCustomer = "KH" + Math.floor(Math.random() * 10000);
+      this.createKH = new DtoCustomer(this.idCustomer, value.nameCustomer, value.phone, value.email, value.idCard,
+        value.address, value.account, value.passwork);
+      this.customerService.createCustomer(this.createKH).subscribe(() => {
+        this.alertService.showAlertSuccess("Tạo thành công");
+      })
+    }
+
   }
 
   showSpinner(name: string) {
     this.spinner.show(name);
+  }
+  hideSpinner(name: string) {
+    this.spinner.hide(name);
   }
 }
