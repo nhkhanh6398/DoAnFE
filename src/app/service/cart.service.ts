@@ -5,6 +5,7 @@ import {IProduct} from "../interface-entity/IProduct";
   providedIn: 'root'
 })
 export class CartService {
+  key: any;
   constructor() { }
   getListGioHang(){
     // @ts-ignore
@@ -20,16 +21,17 @@ export class CartService {
       currentList= [];
     }
     var daCo =false;
+    var quantitytest = 1;
     for (var sp of currentList){
       if (sp.productId == masp){
-        sp.soLuong++;
+        sp.productQuantity++;
         daCo = true;
       }
     }
     if(!daCo) {
       currentList.push({
         productId: masp,
-        soLuong: quantity,
+        productQuantity: quantity,
         tensp: productName,
         gia: price
       })
@@ -58,13 +60,13 @@ export class CartService {
   getSoLuongGioHang():number {
     var currentList = this.getListGioHang();
 
-    var soLuong = 0;
+    var productQuantity = 0;
     if(currentList != null) {
       for(var sp of currentList) {
-        soLuong += sp.soLuong;
+        productQuantity += sp.productQuantity;
       }
     }
 
-    return soLuong;
+    return productQuantity;
   }
 }

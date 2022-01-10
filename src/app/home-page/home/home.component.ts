@@ -32,6 +32,7 @@ export class HomeComponent implements OnInit {
   min: any;
   sec: any;
   quantity: number = 1;
+  key:any;
   constructor(private productService: ProductService, private loginService: LoginService, private customerService: CustomerService,
               private cartService: CartService, private router: Router, private alertService: AlertService,
               private route: ActivatedRoute, private dialog: MatDialog, private spinner: NgxSpinnerService) {
@@ -39,6 +40,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.totalNumber = this.cartService.getSoLuongGioHang();
+    this.key = this.cartService.key;
     this.setCountDownTime();
     this.searchProduct = new FormGroup({
       key: new FormControl('')

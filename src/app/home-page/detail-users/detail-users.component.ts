@@ -13,6 +13,8 @@ import {MatDialog} from "@angular/material/dialog";
 import {DtoCustomer} from "../../interface-entity/DtoCustomer";
 import {OrderService} from "../../service/order.service";
 import {ListOrderComponent} from "../list-order/list-order.component";
+import {EditCustomerComponent} from "../../customer/edit-customer/edit-customer.component";
+import {ChangePassWordComponent} from "../change-pass-word/change-pass-word.component";
 
 @Component({
   selector: 'app-detail-users',
@@ -27,7 +29,9 @@ export class DetailUsersComponent implements OnInit {
   listCategories: ICategories[] = [];
   updateCustomer!: FormGroup;
   id!: any;
+  idCustomerChangePass: any;
   customerEdit!: DtoCustomer;
+  key:any;
   constructor(private productService: ProductService, private customerService: CustomerService, private cartService: CartService, private alertService: AlertService,
               private loginService: LoginService, private router: Router, private dialog: MatDialog,
               private activatedRoute: ActivatedRoute,
@@ -35,6 +39,7 @@ export class DetailUsersComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.key = this.cartService.key;
     this.updateCustomer = new FormGroup({
       idCustomer: new FormControl("", [Validators.required]),
       nameCustomer: new FormControl("", [Validators.required]),
@@ -49,7 +54,6 @@ export class DetailUsersComponent implements OnInit {
       this.id = param.get('id');
       console.log(this.id);
       this.customerService.getAccount(this.id).subscribe((data) => {
-        console.log(data);
         this.updateCustomer.patchValue({
           idCustomer: data.customers.idCustomer,
           nameCustomer: data.customers.nameCustomer,
@@ -146,17 +150,29 @@ export class DetailUsersComponent implements OnInit {
   }
 
   openListOrder(username: string) {
-    this.ordersService.getOrdersByAccount(username).subscribe((data)=>{
       const dialog = this.dialog.open(ListOrderComponent, {
         width: '1000px',
         height: '100%',
         disableClose: false,
         autoFocus: false,
-        data: data
       });
       dialog.afterClosed().subscribe(result => {
         this.ngOnInit();
       })
-    });
+
+  }
+
+  openChangePassword(idCustomerChangePass: any) {
+    this.customerService.getAccount(idCustomerChangePass).subscribe((data)=>{
+      const dialog = this.dialog.open(ChangePassWordComponent,{
+        width: '500px',
+        data: data,
+        disableClose: false,
+        autoFocus: false
+      })
+      dialog.afterClosed().subscribe(result => {
+        this.ngOnInit();
+      });
+    })
   }
 }

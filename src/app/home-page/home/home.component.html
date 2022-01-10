@@ -47,6 +47,7 @@
           </p>
           <div *ngIf="username!=''" class="dropdown"><i class="fas fa-user dropbtn"> {{username}}</i>
             <div class="dropdown-content">
+              <a *ngIf="username ==='admin'" routerLink="/product-list">Quản lý trang Admin</a>
               <a [routerLink]="['/detail-users', username]">Thông tin cá nhân</a>
               <a (click)="logOut()">Đăng xuất</a>
             </div>

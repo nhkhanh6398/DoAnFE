@@ -10,6 +10,7 @@ export interface DtoOrder {
   address:string;
   phone:string;
   total:number;
+  quantity:number;
 
 
 }

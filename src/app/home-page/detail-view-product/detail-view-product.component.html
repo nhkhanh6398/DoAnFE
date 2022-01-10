@@ -47,6 +47,7 @@
           </p>
           <div *ngIf="username!=''" class="dropdown"><i class="fas fa-user dropbtn"> {{username}}</i>
             <div class="dropdown-content">
+              <a *ngIf="username ==='admin'" routerLink="/product-list">Quản lý trang Admin</a>
               <a [routerLink]="['/detail-users', username]">Thông tin cá nhân</a>
               <a (click)="logOut()">Đăng xuất</a>
             </div>
@@ -117,11 +118,12 @@
       </div>
       <div class="row">
         <div class="col-6 col-md-6 col-sm-6">
-          <button class="btn btn-cart"  (click)="add(product.productId,product.productName,
+          <button class="btn btn-cart" *ngIf="product.productQuantity<=0"><i class="fas fa-cart-plus"></i>Hết Hàng</button>
+          <button class="btn btn-cart" *ngIf="product.productQuantity >0"  (click)="add(product.productId,product.productName,
           product.productPrice,quantity)"><i class="fas fa-cart-plus"></i>Thêm Vào Giỏ Hàng</button>
         </div>
         <div class="col-6 col-md-6 col-sm-6">
-          <button class="btn btn-buy">Mua Ngay</button>
+          <button class="btn btn-buy" *ngIf="product.productQuantity >0">Mua Ngay</button>
         </div>
       </div>
     </div>

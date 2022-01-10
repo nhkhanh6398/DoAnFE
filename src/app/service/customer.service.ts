@@ -6,6 +6,7 @@ import {IEmployee} from "../interface-entity/IEmployee";
 import {DtoEmployee} from "../interface-entity/DtoEmployee";
 import {DtoCustomer} from "../interface-entity/DtoCustomer";
 import {LoginService} from "./login.service";
+import {DtoAccount} from "../interface-entity/DtoAccount";
 
 @Injectable({
   providedIn: 'root'
@@ -31,8 +32,8 @@ export class CustomerService {
   getAllAccount():Observable<any>{
     return this.httpClient.get<any>(this.URL + 'account');
   }
-  getCustomerById(id:string):Observable<ICustomer> {
-    return this.httpClient.get<ICustomer>(this.URL + 'getInformation/' + id);
+  getCustomerById(id:string):Observable<any> {
+    return this.httpClient.get<ICustomer>(this.URL + 'getInforByAdmin/' + id,this.httpOptions);
   }
   deleteCustomer(id:string):Observable<any>{
     return this.httpClient.delete<ICustomer>(this.URL+'delete/'+id,this.httpOptions);
@@ -51,5 +52,8 @@ export class CustomerService {
   }
   getAccount(id:string):Observable<any>{
     return this.httpClient.get<any>(this.URL + 'getByAccount/'+id);
+  }
+  changePassWord(dtoAccount: DtoAccount):Observable<any>{
+    return this.httpClient.put<any>(this.URL+'changePassWord',dtoAccount);
   }
 }

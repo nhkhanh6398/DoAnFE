@@ -26,6 +26,10 @@ import {ListCustomerComponent} from "./customer/list-customer/list-customer.comp
 import {CreateCustomerComponent} from "./customer/create-customer/create-customer.component";
 import { NgxSpinnerModule } from "ngx-spinner";
 import {CookieService} from "ngx-cookie-service";
+import { OrderAdminComponent } from './order-admin/order-admin.component';
+import { StatisticComponent } from './statistic/statistic.component';
+import {NgApexchartsModule} from "ng-apexcharts";
+import {DatePipe} from "@angular/common";
 
 
 
@@ -40,6 +44,8 @@ import {CookieService} from "ngx-cookie-service";
     CreateEmployeeComponent,
     ListCustomerComponent,
     CreateCustomerComponent,
+    OrderAdminComponent,
+    StatisticComponent,
   ],
   imports: [
     BrowserModule,
@@ -59,9 +65,10 @@ import {CookieService} from "ngx-cookie-service";
     SlickCarouselModule,
     NgxImageZoomModule,
     NgxSpinnerModule,
+    NgApexchartsModule,
 
   ],
-  providers: [CookieService],
+  providers: [DatePipe,CookieService],
   exports: [
     HeaderComponent,
   ],

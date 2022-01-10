@@ -13,6 +13,7 @@ import {MatDialog} from "@angular/material/dialog";
 import {OrderService} from "../../service/order.service";
 import {DtoOrder} from "../../interface-entity/DtoOrder";
 import {PaymentComponent} from "../payment/payment.component";
+import {NgxSpinnerService} from "ngx-spinner";
 
 @Component({
   selector: 'app-detail-cart',
@@ -28,10 +29,12 @@ export class DetailCartComponent implements OnInit {
   username: string = '';
   orderProduct: any;
   ordersId:any;
+  check:any;
   listCategories: ICategories[]=[];
   constructor(private productService: ProductService,private cartService: CartService,private alertService: AlertService,
               private loginService:LoginService, private router: Router, private customerService: CustomerService,
-              private dialog:MatDialog,private orderService:OrderService) { }
+              private dialog:MatDialog,private orderService:OrderService,
+              private spinner: NgxSpinnerService) { }
 
   ngOnInit(): void {
     this.username = this.loginService.getUserName();
@@ -131,16 +134,24 @@ export class DetailCartComponent implements OnInit {
   }
 
   OpenPayment() {
+    if (this.listCart.length === 0){
+      this.alertService.showAlertError("Bạn chưa mua hàng để thanh toán");
+    }else {
+      let account = this.loginService.getUserName();
+      this.customerService.getAccount(account).subscribe(data => {
       const dialog = this.dialog.open(PaymentComponent, {
         width: '1000px',
         height: '100%',
         disableClose: false,
         autoFocus: false,
+        data: data
       });
       dialog.afterClosed().subscribe(result => {
-
+        this.cartService.xoaHet();
         this.ngOnInit();
       })
-
+    });
+    }
   }
+
 }

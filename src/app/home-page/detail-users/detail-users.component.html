@@ -47,6 +47,7 @@
           </p>
           <div *ngIf="username!=''" class="dropdown"><i class="fas fa-user dropbtn"> {{username}}</i>
             <div class="dropdown-content">
+              <a *ngIf="username ==='admin'" routerLink="/product-list">Quản lý trang Admin</a>
               <a [routerLink]="['/detail-users', username]">Thông tin cá nhân</a>
               <a (click)="logOut()">Đăng xuất</a>
             </div>
@@ -73,6 +74,7 @@
       </div>
       <div class="row">
         <button class="btn-outline-success btn" (click)="openListOrder(username)">Đơn mua</button>
+        <button class="btn-outline-success btn mt-2" (click)="openChangePassword(username)">Đổi mật khẩu</button>
       </div>
     </div>
     <div class="col-sm-12 col-9 col-md-9" style="background-color: white">
@@ -87,7 +89,7 @@
         <div class="col-12">
           <form class="row g-3 was-validated" [formGroup]="updateCustomer">
             <div class="mb-3 col-md-12">
-              <label class="form-label">Tài Đăng Nhập: </label>
+              <label class="form-label">Tài Khoản Đăng Nhập: </label>
               <input type="text" class="form-control" formControlName="account"
                      placeholder="Nhập tài khoản" readonly>
               <div class="alert alert-danger" *ngIf="updateCustomer.get('account')?.invalid && updateCustomer.get('account')?.touched &&

@@ -3,6 +3,7 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {LoginService} from "./login.service";
 import {DtoOrder} from "../interface-entity/DtoOrder";
 import {Observable} from "rxjs";
+import {OrderProduct} from "../interface-entity/OrderProduct";
 
 @Injectable({
   providedIn: 'root'
@@ -26,5 +27,17 @@ export class OrderService {
   }
   getOrdersByAccount(account: string):Observable<any>{
     return this.httpClient.get<any>(this.URL+'getOrders/' + account);
+  }
+  getListOrderProduct(account:string):Observable<OrderProduct[]>{
+    return this.httpClient.get<OrderProduct[]>(this.URL + 'getListOrderProduct/'+account);
+  }
+  getListOrderAdmin():Observable<any>{
+    return this.httpClient.get<any>(this.URL+'listOrder-Admin',this.httpOptions);
+  }
+  searchPageOrder(page:number,key:string):Observable<any>{
+    return this.httpClient.get<any>(this.URL+'search' +'?page=' +page + '&key=' + key,this.httpOptions);
+  }
+  getListStatistic(startDate:string,endDate:string):Observable<any>{
+    return this.httpClient.get<any>(this.URL+'statisticOrder?start=' + startDate + '&end=' + endDate,this.httpOptions);
   }
 }

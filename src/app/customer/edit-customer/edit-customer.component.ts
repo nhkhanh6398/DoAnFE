@@ -28,16 +28,16 @@ export class EditCustomerComponent implements OnInit {
       account : new FormControl("",[Validators.required]),
       passwork : new FormControl("",[Validators.required]),
     });
-    this.customerService.getCustomerById(this.data.idCustomer).subscribe((data)=>{
+    this.customerService.getCustomerById(this.data.customers.idCustomer).subscribe((data)=>{
       this.updateCustomer.patchValue({
-        idCustomer: data.idCustomer,
-        nameCustomer: data.nameCustomer,
-        phone: data.phone,
-        email: data.email,
-        idCard: data.idCard,
-        address: data.address,
-        account: data.account.account,
-        passwork: data.account.password
+        idCustomer: data.customers.idCustomer,
+        nameCustomer: data.customers.nameCustomer,
+        phone: data.customers.phone,
+        email: data.customers.email,
+        idCard: data.customers.idCard,
+        address: data.customers.address,
+        account: data.account,
+        passwork: data.password
       });
     })
   }

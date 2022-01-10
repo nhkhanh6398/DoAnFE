@@ -59,6 +59,7 @@ export class RegistrationComponent implements OnInit {
         value.address, value.account, value.passwork);
       this.customerService.createCustomer(this.createKH).subscribe(() => {
         this.alertService.showAlertSuccess("Tạo thành công");
+        this.hideSpinner("sp3");
       })
     }
 

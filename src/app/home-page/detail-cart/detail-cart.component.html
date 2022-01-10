@@ -47,6 +47,7 @@
           </p>
           <div *ngIf="username!=''" class="dropdown"><i class="fas fa-user dropbtn"> {{username}}</i>
             <div class="dropdown-content">
+              <a *ngIf="username ==='admin'" routerLink="/product-list">Quản lý trang Admin</a>
               <a [routerLink]="['/detail-users', username]">Thông tin cá nhân</a>
               <a (click)="logOut()">Đăng xuất</a>
             </div>
@@ -63,7 +64,7 @@
   </div>
 </div>
 <div class="container">
-<table id="tableComputer" class="table table-striped  " style="width: 100%">
+<table id="tableComputer" class="table table-striped  " style="width: 100%" *ngIf="!check">
   <thead class="table-primary text-center">
   <tr>
     <th class="text-center ">Mã SP</th>
@@ -77,10 +78,10 @@
   <tbody>
   <tr *ngFor="let list of listCart">
     <th scope="row">{{list.productId}}</th>
-    <td  class="text-center ">{{list.tensp}}</td>
-    <td  class="text-center ">{{list.gia}}</td>
-    <td  class="text-center ">{{list.soLuong}}</td>
-    <td  class="text-center ">{{list.gia*list.soLuong}}</td>
+    <td class="text-center ">{{list.tensp}}</td>
+    <td class="text-center ">{{list.gia}}</td>
+    <td class="text-center ">{{list.productQuantity}}</td>
+    <td class="text-center ">{{list.gia * list.productQuantity}}</td>
     <td class="text-center">
       <button type="button" class=" border-0 btn btn-outline-danger" data-bs-toggle="modal"
               data-bs-target="#exampleModalDelete" (click)="openDialogDelete(list.productId)"
@@ -94,9 +95,11 @@
     <th  class="text-danger" scope="row">Tổng Tiền</th>
     <td class="text-center">{{toltal|currency:'VND'}}</td>
     <td class="text-center" *ngIf="username == '' "><button class="btn btn-outline-info" routerLink="/login">Đăng Nhập Để Thanh Toán</button></td>
-    <td class="text-center" *ngIf="username != '' "><button class="btn btn-outline-info" (click)="OpenPayment()">Thanh Toán</button></td>
+    <td class="text-center" *ngIf="username != ''"><button class="btn btn-outline-info" (click)="OpenPayment()">Thanh Toán</button></td>
   </tr>
   </tbody>
 </table>
 </div>
+<ngx-spinner name="sp3" [fullScreen]="true" type="ball-spin-clockwise" size="medium"></ngx-spinner>
+<div class="col-md-3 mb-3"></div>
 <app-footer></app-footer>

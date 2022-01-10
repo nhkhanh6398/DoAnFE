@@ -26,6 +26,7 @@ export class DetailViewProductComponent implements OnInit {
   username: string ='';
   listCategories: ICategories[]=[];
   quantity:number = 1;
+  key:any;
   constructor(private productService: ProductService, private router: Router, private activatedRoute: ActivatedRoute,
               private cartService: CartService, private alertService: AlertService,private loginService:LoginService,
               private customerService: CustomerService, private dialog: MatDialog) {
@@ -33,6 +34,7 @@ export class DetailViewProductComponent implements OnInit {
 
   ngOnInit(): void {
     this.username = this.loginService.getUserName();
+    this.key = 1;
     this.totalNumber = this.cartService.getSoLuongGioHang();
     this.productService.getAllCategories().subscribe((data)=>{
       this.listCategories = data;

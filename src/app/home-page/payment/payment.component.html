@@ -33,6 +33,9 @@
         <div class="alert alert-danger" *ngIf="createPayment.get('address')?.invalid && createPayment.get('address')?.touched &&
            createPayment.get('address')?.errors?.required">Địa chỉ nhận hàng không được để trống.
         </div>
+        <div class="alert alert-danger" *ngIf="createPayment.get('address')?.invalid && createPayment.get('address')?.touched &&
+           createPayment.get('address')?.errors?.checkAddress">Địa chỉ nhận hàng không được "Trống".
+        </div>
       </div>
       <div class="mb-3 col-md-6">
         <label class="form-label">Số Điện Thoại Người Nhận: <span style="color: red">(*)</span></label>
@@ -58,7 +61,7 @@
       </div>
       <div class="col-md-3 mb-3">
         <button type="submit" class="btn btn-success" [mat-dialog-close]="true" cdkFocusInitial
-        (click)="create()" [disabled]="createPayment.invalid">Đặt Hàng
+        (click)="create()" [disabled]="createPayment.invalid" (click)="showSpinner('sp3')">Đặt Hàng
         </button>
       </div>
       <div class="col-md-3 mb-3"></div>

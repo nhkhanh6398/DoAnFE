@@ -94,7 +94,7 @@
                     <option value=0>Chọn bằng cấp</option>
                     <option *ngFor="let position of positionList"
                             [ngValue]="position?.positionId">{{position.positionName}}</option>
-                  </select>mưa
+                  </select>
                 </div>
                 <div *ngIf="createEmployee.controls.positionId.invalid">
                   <div class="alert alert-danger" *ngIf="createEmployee.controls.positionId.errors?.notNull">Bằng cấp
@@ -111,7 +111,7 @@
               </div>
               <div class="col-md-3 mb-3">
                 <button type="submit" class="btn btn-success" [mat-dialog-close]="true" cdkFocusInitial
-                        (click)="create()">Lưu sản phẩm
+                        (click)="create()">Thêm Nhân Viên
                 </button>
               </div>
               <div class="col-md-3 mb-3"></div>

@@ -18,6 +18,8 @@ import {RegistrationComponent} from "./registration/registration.component";
 import {DetailUsersComponent} from "./detail-users/detail-users.component";
 import {PaymentComponent} from "./payment/payment.component";
 import {NgxSpinnerModule} from "ngx-spinner";
+import {ListOrderComponent} from "./list-order/list-order.component";
+import {ChangePassWordComponent} from "./change-pass-word/change-pass-word.component";
 
 
 
@@ -32,7 +34,9 @@ import {NgxSpinnerModule} from "ngx-spinner";
     DetailCartComponent,
     DetailUsersComponent,
     RegistrationComponent,
-    PaymentComponent
+    PaymentComponent,
+    ListOrderComponent,
+    ChangePassWordComponent
   ],
   exports: [
 

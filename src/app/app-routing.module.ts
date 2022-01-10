@@ -8,6 +8,8 @@ import {HomeComponent} from "./home-page/home/home.component";
 import {DetailProductComponent} from "./product/detail-product/detail-product.component";
 import {DetailViewProductComponent} from "./home-page/detail-view-product/detail-view-product.component";
 import {AuthGuard} from "./service/AuthGuard";
+import {OrderAdminComponent} from "./order-admin/order-admin.component";
+import {StatisticComponent} from "./statistic/statistic.component";
 
 const routes: Routes = [
 
@@ -20,6 +22,8 @@ const routes: Routes = [
   {path:"",component: HomeComponent},
   {path: "home",component: HomeComponent,data:{breadcrumb: 'Home'}},
   {path:"detail-product/:id",component: DetailViewProductComponent},
+  {path:"list-order-admin",component: OrderAdminComponent},
+  {path:"statistic",component: StatisticComponent},
 ];
 
 @NgModule({

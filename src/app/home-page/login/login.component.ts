@@ -7,6 +7,7 @@ import {Router} from "@angular/router";
 import {RegistrationComponent} from "../registration/registration.component";
 import {NgxSpinnerService} from "ngx-spinner";
 import {CustomerService} from "../../service/customer.service";
+import {CartService} from "../../service/cart.service";
 
 @Component({
   selector: 'app-login',
@@ -23,7 +24,7 @@ export class LoginComponent implements OnInit {
   isSubmit: boolean = false;
 
   constructor(private loginService: LoginService,private dialog: MatDialog,private router: Router,
-              private customerService:CustomerService,
+              private customerService:CustomerService,private cartService:CartService,
               private element: ElementRef,private alertService:AlertService,private spinner: NgxSpinnerService) { }
 
   ngOnInit(): void {
