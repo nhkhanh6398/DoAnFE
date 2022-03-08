@@ -8,7 +8,7 @@
         <button class="fas fa-plus-circle btn btn-success ml-5" routerLink="/statistic" >Thống kê doanh thu</button>
       </div>
     </div>
-    <form [formGroup]="searchOrder" (ngSubmit)="search()" (keydown)="seacrhEnter($event)">
+    <form [formGroup]="searchOrder" (ngSubmit)="search()" >
       <div class="row mb-2">
         <div class="col-2 col-xl-2 col-sm-2 col-lg-2">
         </div>
@@ -33,6 +33,8 @@
           <th class="text-center ">Số Lượng</th>
           <th class="text-center ">Địa chỉ giao hàng</th>
           <th class="text-center ">Số Điện Thoại</th>
+          <th class="text-center ">Trạng Thái</th>
+          <th class="text-center ">Chức Năng</th>
 
 
         </tr>
@@ -46,6 +48,18 @@
           <td>{{list.quantity}}</td>
           <td>{{list.orders.address}}</td>
           <td>{{list.orders.phone}}</td>
+          <td *ngIf="list.orders.statusContract.status === 'Đã Duyệt'" style="color: blue">{{list.orders.statusContract.status}}</td>
+          <td *ngIf="list.orders.statusContract.status === 'Đang Giao'" style="color: blue">{{list.orders.statusContract.status}}</td>
+          <td *ngIf="list.orders.statusContract.status != 'Đã Duyệt'" style="color: red">{{list.orders.statusContract.status}}</td>
+          <td>
+            <button class="btn btn-outline-success" *ngIf="list.orders.statusContract.status === 'Đã Duyệt'"><i class="fas fa-check" ></i></button>
+            <button class="btn btn-outline-danger" (click)="changeStatus(list.id.ordersId)" *ngIf="list.orders.statusContract.status != 'Đã Duyệt'">
+              <i class="fas fa-exclamation"></i></button>
+            <button type="button" class=" border-0 btn btn-outline-danger" data-bs-toggle="modal"
+                    data-bs-target="#exampleModalDelete" (click)="delete(list.id.ordersId)"
+            ><i class="fas fa-trash-alt"></i></button>
+          </td>
+
         </tr>
         </tbody>
       </table>

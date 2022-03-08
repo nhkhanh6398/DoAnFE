@@ -8,14 +8,16 @@ import {ToastrService} from "ngx-toastr";
 })
 export class AlertService {
 
- 
+
 
   constructor(
     private toast: ToastrService
   ) { }
 
   showAlertSuccess(message: string) {
-    this.toast.success(message, 'Thông báo: ');
+    this.toast.success(message, 'Thông báo: ',{
+      timeOut: 1500,
+    });
   }
   showAlertError(message: string) {
     this.toast.error(message, 'Thông báo: ');

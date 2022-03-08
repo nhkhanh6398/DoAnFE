@@ -24,7 +24,7 @@ export class CartService {
     var quantitytest = 1;
     for (var sp of currentList){
       if (sp.productId == masp){
-        sp.productQuantity++;
+        sp.productQuantity+= quantity;
         daCo = true;
       }
     }

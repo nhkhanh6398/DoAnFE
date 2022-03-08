@@ -14,6 +14,7 @@ import {OrderService} from "../../service/order.service";
 import {DtoOrder} from "../../interface-entity/DtoOrder";
 import {PaymentComponent} from "../payment/payment.component";
 import {NgxSpinnerService} from "ngx-spinner";
+import {DeleteAllComponent} from "../delete-all/delete-all.component";
 
 @Component({
   selector: 'app-detail-cart',
@@ -31,6 +32,8 @@ export class DetailCartComponent implements OnInit {
   ordersId:any;
   check:any;
   listCategories: ICategories[]=[];
+  checkList: any;
+  private char: any;
   constructor(private productService: ProductService,private cartService: CartService,private alertService: AlertService,
               private loginService:LoginService, private router: Router, private customerService: CustomerService,
               private dialog:MatDialog,private orderService:OrderService,
@@ -44,6 +47,11 @@ export class DetailCartComponent implements OnInit {
     });
     this.toltal = 0;
     this.getTotal();
+    if (this.listCart.length === 0){
+      this.checkList = true;
+    }else {
+      this.checkList = false;
+    }
     this.searchProduct = new FormGroup({
       key: new FormControl('')
     })
@@ -55,7 +63,7 @@ export class DetailCartComponent implements OnInit {
   getTotal(){
     this.listCart = this.cartService.getListGioHang();
     for (let i =0;i<this.listCart.length;i++){
-      this.toltal+= this.listCart[i].gia * this.listCart[i].soLuong;
+      this.toltal+= this.listCart[i].gia * this.listCart[i].productQuantity;
     }
   }
   openDialogDelete(productId: any) {
@@ -70,6 +78,9 @@ export class DetailCartComponent implements OnInit {
     this.loginService.removeRole();
     this.cartService.xoaHet();
     this.router.navigateByUrl("/login").then();
+  }
+  numToString(num: number) {
+    return num.toLocaleString().split(',').join(this.char || '.');
   }
   slideConfig = {"slidesToShow": 4, "slidesToScroll": 4};
 
@@ -102,7 +113,6 @@ export class DetailCartComponent implements OnInit {
         data: data
       });
       dialog.afterClosed().subscribe(result => {
-
         this.ngOnInit();
       })
     });
@@ -147,11 +157,22 @@ export class DetailCartComponent implements OnInit {
         data: data
       });
       dialog.afterClosed().subscribe(result => {
-        this.cartService.xoaHet();
+        this.router.navigateByUrl('/detail-cart');
         this.ngOnInit();
       })
     });
     }
   }
 
+  deleteAll() {
+    const dialog = this.dialog.open(DeleteAllComponent, {
+      width: '500px',
+      disableClose: false,
+      autoFocus: false,
+    });
+    dialog.afterClosed().subscribe(result => {
+      this.ngOnInit();
+    });
+
+  }
 }

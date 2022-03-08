@@ -45,6 +45,7 @@ export class CreateCustomerComponent implements OnInit {
   }
 
   check(form: AbstractControl): ValidationErrors | null {
+
     const accountCheck = form.value.account;
     for (let i = 0; i < this.accountList.length; i++) {
       if (accountCheck === this.accountList[i].account) {

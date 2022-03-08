@@ -11,6 +11,9 @@ body .slick-next {
   font-size: 13px;
   color: rgb(56, 56, 61);
 }
+.detail{
+  margin-top: 2px;
+}
 .suggestion__items-title{
   height: 100px;
   font-size: 25px;
@@ -50,14 +53,14 @@ body .slick-next {
 }
 .btn-cart{
   background: rgba(255,87,34,0.1);
-  color: #ee4d2d;
+  color:  #3ba66b;
   border: 1px solid;
   width: 250px;
   height: 48px;
 }
 .btn-buy{
   color: #fff;
-  background: #ee4d2d;
+  background:  #3ba66b;
   width: 250px;
   height: 48px;
 }

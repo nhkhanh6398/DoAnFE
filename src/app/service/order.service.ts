@@ -35,9 +35,15 @@ export class OrderService {
     return this.httpClient.get<any>(this.URL+'listOrder-Admin',this.httpOptions);
   }
   searchPageOrder(page:number,key:string):Observable<any>{
-    return this.httpClient.get<any>(this.URL+'search' +'?page=' +page + '&key=' + key,this.httpOptions);
+    return this.httpClient.get<any>(this.URL+'search' +'?page=' +page + '&account=' + key,this.httpOptions);
   }
   getListStatistic(startDate:string,endDate:string):Observable<any>{
     return this.httpClient.get<any>(this.URL+'statisticOrder?start=' + startDate + '&end=' + endDate,this.httpOptions);
+  }
+  getOrderProductByIdOrder(id: number):Observable<any>{
+    return this.httpClient.get<any>(this.URL + 'finById/' + id,this.httpOptions);
+  }
+  deleteOrder(id:number):Observable<any>{
+    return this.httpClient.delete<any>(this.URL + 'delete/' + id,this.httpOptions)
   }
 }

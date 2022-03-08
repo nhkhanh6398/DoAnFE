@@ -18,6 +18,7 @@ export class ListOrderComponent implements OnInit {
   toltal: number = 0;
   check: any;
   key:any;
+  private char: any;
   constructor(private orderService:OrderService,private loginService:LoginService,private cartService:CartService) { }
 
   ngOnInit(): void {
@@ -27,10 +28,13 @@ export class ListOrderComponent implements OnInit {
     this.orderService.getListOrderProduct(this.account).subscribe((data)=>{
       this.listOrderProduct = data;
       this.check = true;
-      console.log(this.listOrderProduct);
+      console.log("đơn mua"+ data);
     });
     this.getTotal();
 
+  }
+  numToString(num: number) {
+    return num.toLocaleString().split(',').join(this.char || '.');
   }
   getTotal(){
     this.orderService.getListOrderProduct(this.account).subscribe((data)=>{

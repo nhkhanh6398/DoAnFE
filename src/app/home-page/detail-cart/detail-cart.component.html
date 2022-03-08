@@ -64,7 +64,7 @@
   </div>
 </div>
 <div class="container">
-<table id="tableComputer" class="table table-striped  " style="width: 100%" *ngIf="!check">
+<table id="tableComputer" class="table table-borderless " style="width: 100%" *ngIf="!check">
   <thead class="table-primary text-center">
   <tr>
     <th class="text-center ">Mã SP</th>
@@ -77,11 +77,11 @@
   </thead>
   <tbody>
   <tr *ngFor="let list of listCart">
-    <th scope="row">{{list.productId}}</th>
+    <th scope="row"  [routerLink]="['/detail-product', list.productId]">{{list.productId}}</th>
     <td class="text-center ">{{list.tensp}}</td>
-    <td class="text-center ">{{list.gia}}</td>
+    <td class="text-center ">{{numToString(list.gia)}}đ</td>
     <td class="text-center ">{{list.productQuantity}}</td>
-    <td class="text-center ">{{list.gia * list.productQuantity}}</td>
+    <td class="text-center ">{{numToString(list.gia * list.productQuantity)}}đ</td>
     <td class="text-center">
       <button type="button" class=" border-0 btn btn-outline-danger" data-bs-toggle="modal"
               data-bs-target="#exampleModalDelete" (click)="openDialogDelete(list.productId)"
@@ -92,8 +92,16 @@
     <td></td>
     <td></td>
     <td></td>
+    <td></td>
+    <td></td>
+    <td class="text-center"><button class="btn btn-outline-danger" *ngIf="!checkList" (click)="deleteAll()">Xóa hết đơn hàng</button></td>
+  </tr>
+  <tr>
+    <td></td>
+    <td></td>
+    <td></td>
     <th  class="text-danger" scope="row">Tổng Tiền</th>
-    <td class="text-center">{{toltal|currency:'VND'}}</td>
+    <td class="text-center">{{numToString(toltal)}}đ</td>
     <td class="text-center" *ngIf="username == '' "><button class="btn btn-outline-info" routerLink="/login">Đăng Nhập Để Thanh Toán</button></td>
     <td class="text-center" *ngIf="username != ''"><button class="btn btn-outline-info" (click)="OpenPayment()">Thanh Toán</button></td>
   </tr>

@@ -14,7 +14,8 @@ import {DtoCustomer} from "../../interface-entity/DtoCustomer";
 import {OrderService} from "../../service/order.service";
 import {ListOrderComponent} from "../list-order/list-order.component";
 import {EditCustomerComponent} from "../../customer/edit-customer/edit-customer.component";
-import {ChangePassWordComponent} from "../change-pass-word/change-pass-word.component";
+import {ChangePassComponent} from "../change-pass/change-pass.component";
+
 
 @Component({
   selector: 'app-detail-users',
@@ -151,7 +152,7 @@ export class DetailUsersComponent implements OnInit {
 
   openListOrder(username: string) {
       const dialog = this.dialog.open(ListOrderComponent, {
-        width: '1000px',
+        width: '1100px',
         height: '100%',
         disableClose: false,
         autoFocus: false,
@@ -162,17 +163,15 @@ export class DetailUsersComponent implements OnInit {
 
   }
 
-  openChangePassword(idCustomerChangePass: any) {
-    this.customerService.getAccount(idCustomerChangePass).subscribe((data)=>{
-      const dialog = this.dialog.open(ChangePassWordComponent,{
-        width: '500px',
-        data: data,
-        disableClose: false,
-        autoFocus: false
-      })
-      dialog.afterClosed().subscribe(result => {
-        this.ngOnInit();
-      });
+  OpenChangePass() {
+    const dialog = this.dialog.open(ChangePassComponent, {
+      width: '1000px',
+      height: '100%',
+      disableClose: false,
+      autoFocus: false,
+    });
+    dialog.afterClosed().subscribe(result => {
+      this.ngOnInit();
     })
   }
 }

@@ -7,13 +7,16 @@ import {LoginComponent} from "./login/login.component";
 import {DetailCartComponent} from "./detail-cart/detail-cart.component";
 import {RegistrationComponent} from "./registration/registration.component";
 import {DetailUsersComponent} from "./detail-users/detail-users.component";
+import {ChangePassComponent} from "./change-pass/change-pass.component";
 
 const routes: Routes = [
 
   {path:"login",component:LoginComponent},
   {path:"registration",component:RegistrationComponent},
   {path:"detail-users/:id",component:DetailUsersComponent},
-  {path:"detail-cart",component:DetailCartComponent}
+  {path:"detail-cart",component:DetailCartComponent},
+  {path:"change-password",component:ChangePassComponent}
+
 
 ];
 

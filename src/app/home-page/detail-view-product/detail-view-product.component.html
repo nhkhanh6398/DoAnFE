@@ -73,6 +73,7 @@
     <div class="col-7 col-md-7 col-md-7 col-sm-12">
 
       <div class="suggestion__items-title">{{product.productName}}</div>
+      <div class="detail">Mô tả: {{product.detail}}</div>
       <div class="suggestion__items-rate">
         <div class="rate__stars">
           <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" size="16" color="#fdd836"
@@ -103,7 +104,7 @@
         <p class="thuong_hieu mt-1">Thương hiệu: {{product.trademark}}</p>
       </div>
       <div class="row price mt-1">
-        <div>{{product.productPrice|currency:'VND'}}</div>
+        <div>{{numToString(product.productPrice)}}đ</div>
       </div>
       <div class="row">
         <div>Số lượng: </div>
@@ -111,7 +112,7 @@
           <div class="cart_quantity_button">
             <a class="cart_quantity_up" (click)="quantity_up()"> + </a>
             <input class="cart_quantity_input" type="text" name="quantity" [value]="quantity" autocomplete="off"
-                   size="2">
+                   size="2" disabled>
             <a class="cart_quantity_down" (click)="quantity_down()"> - </a>
           </div>
         </div>
@@ -123,7 +124,8 @@
           product.productPrice,quantity)"><i class="fas fa-cart-plus"></i>Thêm Vào Giỏ Hàng</button>
         </div>
         <div class="col-6 col-md-6 col-sm-6">
-          <button class="btn btn-buy" *ngIf="product.productQuantity >0">Mua Ngay</button>
+          <button class="btn btn-buy" *ngIf="product.productQuantity >0" (click)="add(product.productId,product.productName,
+          product.productPrice,quantity)" routerLink="/detail-cart">Mua Ngay</button>
         </div>
       </div>
     </div>

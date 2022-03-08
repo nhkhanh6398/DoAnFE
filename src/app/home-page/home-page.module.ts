@@ -19,7 +19,8 @@ import {DetailUsersComponent} from "./detail-users/detail-users.component";
 import {PaymentComponent} from "./payment/payment.component";
 import {NgxSpinnerModule} from "ngx-spinner";
 import {ListOrderComponent} from "./list-order/list-order.component";
-import {ChangePassWordComponent} from "./change-pass-word/change-pass-word.component";
+import {DeleteAllComponent} from "./delete-all/delete-all.component";
+import {ChangePassComponent} from "./change-pass/change-pass.component";
 
 
 
@@ -36,7 +37,8 @@ import {ChangePassWordComponent} from "./change-pass-word/change-pass-word.compo
     RegistrationComponent,
     PaymentComponent,
     ListOrderComponent,
-    ChangePassWordComponent
+    DeleteAllComponent,
+    ChangePassComponent
   ],
   exports: [
 

@@ -27,6 +27,7 @@ export class DetailViewProductComponent implements OnInit {
   listCategories: ICategories[]=[];
   quantity:number = 1;
   key:any;
+  private char: any;
   constructor(private productService: ProductService, private router: Router, private activatedRoute: ActivatedRoute,
               private cartService: CartService, private alertService: AlertService,private loginService:LoginService,
               private customerService: CustomerService, private dialog: MatDialog) {
@@ -123,12 +124,18 @@ export class DetailViewProductComponent implements OnInit {
   quantity_up() {
     var quantityUp = 1;
     this.quantity += quantityUp;
+    if(this.quantity > this.product.productQuantity){
+      this.alertService.showAlertError("Số lượng còn lại không đủ để bạn tăng thêm");
+      this.quantity = this.product.productQuantity;
+    }
   }
-
+  numToString(num: number) {
+    return num.toLocaleString().split(',').join(this.char || '.');
+  }
   quantity_down() {
     var quantityDown = 1;
     this.quantity -= quantityDown;
-    if (this.quantity ==0){
+    if (this.quantity <= 0){
       alert("Số lượng không được bé hơn 1");
       this.quantity = 1;
     }

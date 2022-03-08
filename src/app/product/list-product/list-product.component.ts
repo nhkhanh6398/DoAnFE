@@ -16,6 +16,7 @@ export class ListProductComponent implements OnInit {
   listProduct: IProduct[] = [];
   indexPagination: number = 1;
   totalPagination: number = 0;
+  char: any;
   searchProduct!: FormGroup;
 
   constructor(private productService: ProductService, private dialog: MatDialog) {
@@ -106,4 +107,7 @@ export class ListProductComponent implements OnInit {
     })
   }
 
+  numToString(num: number) {
+    return num.toLocaleString().split(',').join(this.char || '.');
+  }
 }

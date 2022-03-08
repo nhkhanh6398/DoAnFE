@@ -8,6 +8,8 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'final-fe';
-
+  onActivate(event:any) {
+    window.scroll(0,0)
+  }
 
 }

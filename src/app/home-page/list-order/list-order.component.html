@@ -18,7 +18,7 @@
   <h2 class="text-center mt-3" style="color: darkblue; font-size: 35px">Danh sách sản phẩm đã mua</h2>
   <div class="row">
     <div class="col-9"></div>
-    <div class="col-3 total">Tổng số tiền: {{toltal|currency:'VND'}}</div>
+    <div class="col-3 total">Tổng số tiền: {{numToString(toltal)}}đ</div>
   </div>
   <table id="tableComputer" class="table table-striped  " style="width: 100%">
     <thead class="table-primary text-center">
@@ -27,7 +27,9 @@
       <th class="text-center ">Hình Ảnh</th>
       <th class="text-center ">Tên SP</th>
       <th class="text-center ">Giá</th>
+      <th class="text-center ">Ngày Mua</th>
       <th class="text-center ">SL</th>
+      <th class="text-center ">Trạng Thái</th>
       <th class="text-center ">Thành Tiền</th>
     </tr>
     </thead>
@@ -37,9 +39,13 @@
       <td class="text-center "><img [src]="'assets/img/' +list.product.productImage" alt="" width="150px"
                                     height="100px"></td>
       <td class="text-center ">{{list.product.productName}}</td>
-      <td class="text-center ">{{list.product.productPrice}}đ</td>
+      <td class="text-center ">{{numToString(list.product.productPrice)}}đ</td>
+      <td class="text-center ">{{list.orders.orderDate |date: 'dd/MM/yyyy'}}</td>
       <td class="text-center ">{{list.quantity}}</td>
-      <td class="text-center ">{{list.product.productPrice * list.quantity | currency:'VND'}}</td>
+      <td *ngIf="list.orders.statusContract.status === 'Đã Duyệt'" style="color: blue">{{list.orders.statusContract.status}}</td>
+      <td *ngIf="list.orders.statusContract.status === 'Đang Giao'" style="color: blue">{{list.orders.statusContract.status}}</td>
+      <td *ngIf="list.orders.statusContract.status != 'Đã Duyệt'" style="color: red">{{list.orders.statusContract.status}}</td>
+      <td class="text-center ">{{numToString(list.product.productPrice * list.quantity)}}đ</td>
     </tr>
     </tbody>
   </table>

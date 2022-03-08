@@ -45,7 +45,7 @@
             <td>{{list.productName}}</td>
             <td>{{list.categories?.categoryName}}</td>
             <td>{{list.trademark}}</td>
-            <td>{{list.productPrice|currency: "VND"}}</td>
+            <td>{{numToString(list.productPrice)}}đ</td>
             <td>{{list.productQuantity}}</td>
             <td class="text-center">
               <button type="button" class="  border-0  btn btn-outline-warning " data-bs-toggle="modal"

@@ -33,6 +33,8 @@ export class HomeComponent implements OnInit {
   sec: any;
   quantity: number = 1;
   key:any;
+  char: any;
+  index: number = 0;
   constructor(private productService: ProductService, private loginService: LoginService, private customerService: CustomerService,
               private cartService: CartService, private router: Router, private alertService: AlertService,
               private route: ActivatedRoute, private dialog: MatDialog, private spinner: NgxSpinnerService) {
@@ -47,6 +49,7 @@ export class HomeComponent implements OnInit {
     });
     this.productService.getAllCategories().subscribe((data) => {
       this.listCategories = data;
+
     });
     this.getList();
     this.username = this.loginService.getUserName();
@@ -62,7 +65,9 @@ export class HomeComponent implements OnInit {
       this.getList();
     }
   }
-
+  numToString(num: number) {
+    return num.toLocaleString().split(',').join(this.char || '.');
+  }
   getList() {
     this.productService.getListProduct().subscribe((data) => {
       this.listProduct = data;
@@ -96,6 +101,11 @@ export class HomeComponent implements OnInit {
   search() {
     this.productService.searchListProduct(this.searchProduct.value.key).subscribe(data => {
       this.listProduct = data;
+      for (let i = 0;i< this.listProduct.length; i++){
+        this.index++;
+      }
+      this.alertService.showAlertSuccess("Tìm thấy "+ this.index + " sản phẩm");
+      this.index = 0;
     }, error => {
       this.alertService.showAlertError("Không tìm thấy kết quả ");
     })
@@ -104,7 +114,7 @@ export class HomeComponent implements OnInit {
   add(productId: string, productName: string, productPrice: number) {
     this.cartService.addToGioHang(productId, productName, productPrice,this.quantity);
     this.alertService.showAlertSuccess("Thêm giỏ hàng thành công");
-    this.ngOnInit();
+    this.totalNumber = this.cartService.getSoLuongGioHang();
   }
 
   logOut() {
@@ -138,6 +148,12 @@ export class HomeComponent implements OnInit {
   searchByCategories(categoryName: string) {
     this.productService.searchListProduct(categoryName).subscribe((data) => {
       this.listProduct = data;
+      for (let i = 0;i< this.listProduct.length; i++){
+        this.index++;
+
+      }
+      this.alertService.showAlertSuccess("Tìm thấy "+ this.index + " sản phẩm");
+      this.index = 0;
     }, error => {
       this.alertService.showAlertError("Không tìm thấy kết quả");
     })
@@ -175,4 +191,6 @@ export class HomeComponent implements OnInit {
     this.min = m;
     this.sec = s;
   }
+
+
 }

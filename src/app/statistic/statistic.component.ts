@@ -53,7 +53,7 @@ export class StatisticComponent implements OnInit {
   interestMoney: number[] = [];
   expectedMoney: number[] = [];
   orders: IOrder[] = [];
-
+  char: any;
   constructor(private datePipe: DatePipe, private orderService: OrderService) {
   }
 
@@ -106,8 +106,11 @@ export class StatisticComponent implements OnInit {
       this.statisticExected();
     })
   }
-
+  numToString(num: number) {
+    return num.toLocaleString().split(',').join(this.char || '.');
+  }
   private statisticExected() {
+
     this.chartOptions = {
       series: [
         {

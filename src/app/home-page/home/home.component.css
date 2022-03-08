@@ -146,10 +146,20 @@ body .slick-next {
   flex-wrap: wrap;
 }
 .suggestion__items{
+  position: relative;
   width: calc(100%/6);
   text-decoration: none;
   padding: 12px;
   background-color: #fff;
+
+}
+.detail-product{
+  text-decoration: none;
+}
+.add{
+  position: absolute;
+  bottom: 5px;
+  right: 12px;
 }
 .suggestion__items:hover{
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.08);
@@ -335,4 +345,18 @@ body .slick-next {
   -webkit-line-clamp: 2;
   overflow: hidden;
 }
+/*@media only screen and (max-width: 600px) {*/
+/*  .header{*/
+/*    height: 100%;*/
+/*    width: 100%;*/
+/*    position: unset;*/
+/*  }*/
+/*  .logo{*/
+/*    width: 50px;*/
+/*  }*/
+/*  .dki-dnhap{*/
+/*    margin-top: 1px;*/
+/*  }*/
+/*}*/
+
 

@@ -105,8 +105,9 @@ export class PaymentComponent implements OnInit {
       }
       console.log(this.orderProduct);
       this.orderService.setOrder(this.orderProduct).subscribe((data) => {
+        this.cartService.xoaHet();
         this.alertService.showAlertSuccess("Đăng kí mua hàng thành công");
-        this.hidenSpinner("sp3")
+        this.hidenSpinner("sp3");
       })
     }
   }

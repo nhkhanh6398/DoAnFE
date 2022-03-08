@@ -1,4 +1,5 @@
 import {IAccount} from "./IAccount";
+import {IStatusOrder} from "./IStatusOrder";
 
 export interface IOrder {
   ordersId:number,
@@ -6,6 +7,7 @@ export interface IOrder {
   address:string,
   userName:string,
   phone:string,
-  total: number
+  total: number,
+  statusContract: IStatusOrder,
   account:IAccount
 }
